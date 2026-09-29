@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" width="800" height="600" role="img" aria-label="Owner reading a review on their phone">
+  <defs>
+    <pattern id="s" width="14" height="14" patternUnits="userSpaceOnUse" patternTransform="rotate(45)">
+      <rect width="14" height="14" fill="#F7F4EE"/>
+      <rect width="7" height="14" fill="#E8E3D8"/>
+    </pattern>
+  </defs>
+  <rect width="800" height="600" fill="url(#s)"/>
+  <rect x="1" y="1" width="798" height="598" fill="none" stroke="#E4DFD5" stroke-width="2"/>
+  <rect x="140" y="268" width="520" height="64" fill="#F7F4EE"/>
+  <text x="400" y="300" text-anchor="middle" dominant-baseline="middle"
+        font-family="ui-monospace, Menlo, Consolas, monospace" font-size="19" letter-spacing="1.4" fill="#5C6B60">Owner reading a review on their phone</text>
+  <text x="400" y="326" text-anchor="middle" dominant-baseline="middle"
+        font-family="ui-monospace, Menlo, Consolas, monospace" font-size="12" letter-spacing="2" fill="#B5744F">PLACEHOLDER — DO NOT SHIP</text>
+</svg>

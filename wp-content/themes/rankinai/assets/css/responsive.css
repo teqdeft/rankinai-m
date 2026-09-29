@@ -1,0 +1,1235 @@
+/* ==========================================================================
+   RankinAI — responsive.css
+   Loaded last.
+
+   Almost everything here is a token override. The component rules in
+   style.css never change — only the values they read. Each block below
+   corresponds to one approved design canvas.
+
+     ≥ 1601      1920 canvas   (the :root values in style.css)
+     1367–1600   1440 canvas
+     1151–1366   1280 canvas
+     901–1150    1024 canvas
+     601–900      768 canvas   — navigation collapses to a sheet here
+     ≤ 600        390 canvas
+   ========================================================================== */
+
+/* ==========================================================================
+   1440
+   ========================================================================== */
+@media (max-width: 1600px) {
+  /* .hero__title carried a hand-set max-width at all five breakpoints
+     (1110 / 987 / 790 / 593 / 350). They sat in media queries, so they beat
+     the --head-w rule in style.css and the hero heading never used the
+     shared measure below 1600px at all. Removed 25 Sep 2026: one measure,
+     set once. */
+  :root {
+    --sec-pad-t: 90px; --sec-pad-b: 90px; --sec-gap: 48px;
+    --card-gap: 24px; --card-pad-x: 27px; --card-pad-y: 24px; --case-photo-h: 195px;
+    --footer-gap: 48px; --ind-col: 255px;
+    --svc-head-pad-b: 54px; --svc-col: 390px; --svc-gap: 72px;
+    --svc-verb-h: 72px; --svc-frame-h: 390px; --svc-row-pad: 42px; --svc-num-col: 60px;
+    --method-col: 465px; --sch-h: 225px; --team-col: 465px; --tile-h: 225px;
+    --q-head-col: 390px; --q-col: 615px;
+    --close-pad-t: 108px; --close-pad-b: 108px; --close-col: 495px; --close-card-pad: 42px;
+
+    --gutter: 90px;   --header-h: 66px;
+    --nav-gap: 36px;  --nav-list-gap: 22px;
+    --nav-actions-gap: 24px; --nav-pad-y: 20px;
+
+    --hero-pad-top: 72px;  --hero-title-mt: 24px;
+    --hero-meta-col: 480px; --hero-meta-gap: 60px; --hero-meta-mt: 42px; --hero-actions-gap: 28px; --hero-copy-w: 880px; --hero-bg-inset: 11% 0 15% 43%; --hero-object-w: 400px; --hero-object-gap: 60px; --icon-size: 32px; --belief-card-pad: 28px;
+    --proof-pad-t: 24px;   --proof-pad-b: 36px;   --stat-gap: 120px;
+
+    --menu-pad-y: 36px;    --menu-gap: 48px;
+
+    --r-control: 12px;     --r-panel: 24px;      --r-section: 40px;
+  }
+  .btn--primary { padding: 15px 27px; }
+  .btn--green   { padding: 11px 21px; }
+  .btn--cream   { padding: 11px 21px; }
+  .btn--lg      { padding: 17px 30px; }
+  .mega__offer .btn { padding: 11px 20px; }
+}
+
+/* ==========================================================================
+   1280
+   ========================================================================== */
+@media (max-width: 1366px) {
+  :root {
+    --sec-pad-t: 80px; --sec-pad-b: 80px; --sec-gap: 43px;
+    --card-gap: 21px; --card-pad-x: 24px; --card-pad-y: 21px; --case-photo-h: 173px;
+    --footer-gap: 43px; --ind-col: 227px;
+    --svc-head-pad-b: 48px; --svc-col: 347px; --svc-gap: 64px;
+    --svc-verb-h: 64px; --svc-frame-h: 347px; --svc-row-pad: 37px; --svc-num-col: 53px;
+    --method-col: 413px; --sch-h: 200px; --team-col: 413px; --tile-h: 200px;
+    --q-head-col: 347px; --q-col: 547px;
+    --close-pad-t: 96px; --close-pad-b: 96px; --close-col: 440px; --close-card-pad: 37px;
+
+    --gutter: 80px;   --header-h: 58px;
+    --nav-gap: 32px;  --nav-list-gap: 20px;
+    --nav-actions-gap: 21px; --nav-pad-y: 18px;
+
+    --hero-pad-top: 64px;  --hero-title-mt: 21px;
+    --hero-meta-col: 427px; --hero-meta-gap: 53px; --hero-meta-mt: 37px; --hero-actions-gap: 26px; --hero-copy-w: 760px; --hero-bg-inset: 10% 0 14% 38%; --hero-object-w: 330px; --hero-object-gap: 48px; --icon-size: 30px; --belief-card-pad: 24px;
+    --proof-pad-t: 21px;   --proof-pad-b: 32px;   --stat-gap: 107px;
+
+    --menu-pad-y: 32px;    --menu-gap: 43px;
+
+    --r-control: 10px;     --r-panel: 20px;      --r-section: 36px;
+  }
+  .btn--primary { padding: 13px 24px; }
+  .btn--green   { padding: 10px 19px; }
+  .btn--cream   { padding: 10px 19px; }
+  .btn--lg      { padding: 14px 27px; }
+  .mega__offer .btn { padding: 10px 18px; }
+}
+
+/* ==========================================================================
+   1024
+   ========================================================================== */
+@media (max-width: 1150px) {
+  :root {
+    --sec-pad-t: 64px; --sec-pad-b: 64px; --sec-gap: 34px;
+    --card-gap: 17px; --card-pad-x: 19px; --card-pad-y: 17px; --case-photo-h: 139px;
+    --footer-gap: 34px; --ind-col: 181px;
+    --svc-head-pad-b: 38px; --svc-col: 278px; --svc-gap: 51px;
+    --svc-verb-h: 51px; --svc-frame-h: 278px; --svc-row-pad: 30px; --svc-num-col: 43px;
+    --method-col: 330px; --sch-h: 160px; --team-col: 330px; --tile-h: 170px;
+    --q-head-col: 278px; --q-col: 437px;
+    --close-pad-t: 77px; --close-pad-b: 77px; --close-col: 352px; --close-card-pad: 30px;
+
+    --gutter: 64px;   --header-h: 52px;
+    --nav-gap: 26px;  --nav-list-gap: 10px;
+    --nav-actions-gap: 17px; --nav-pad-y: 14px;
+
+    --hero-pad-top: 51px;  --hero-title-mt: 17px;
+    --hero-meta-col: 342px; --hero-meta-gap: 42px; --hero-meta-mt: 30px; --hero-actions-gap: 24px; --hero-copy-w: none;
+    --proof-pad-t: 17px;   --proof-pad-b: 26px;   --stat-gap: 86px;
+
+    --menu-pad-y: 26px;    --menu-gap: 34px;
+
+    --r-control: 8px;      --r-panel: 16px;      --r-section: 30px;
+  }
+  .btn--primary { padding: 11px 19px; }
+  .btn--green   { padding: 8px 15px; }
+  .btn--cream   { padding: 8px 15px; }
+  .btn--lg      { padding: 12px 21px; }
+  .mega__offer .btn { padding: 8px 14px; }
+  /* From here the copy has the width; the image becomes a band beneath it
+     rather than a backdrop, so the tiles never sit under the words. */
+  /* No room beside the copy here. The object becomes a small block above
+     the stat bar rather than an overlay on top of it. */
+  /* Below 1150 the copy needs the full width, so the hero goes back to one
+     column and the object becomes a block beneath it. */
+  .hero--object .hero__inner { display: block; }
+  .hero__object {
+    width: 240px;
+    margin-top: 36px;
+  }
+  .hero__bg { position: static; height: 300px; margin-top: 40px; -webkit-mask-image: none; mask-image: none; }
+  /* (The SVG's alignment switches to centred here — done in script.js,
+     since preserveAspectRatio is an attribute, not a CSS property.) */
+  .eyebrow::before { width: 48px; }
+}
+
+/* ==========================================================================
+   768 — the navigation becomes a sheet
+   ========================================================================== */
+@media (max-width: 900px) {
+  :root {
+    --sec-pad-t: 48px; --sec-pad-b: 48px; --sec-gap: 28px;
+    --card-gap: 16px; --card-pad-x: 22px; --card-pad-y: 20px; --case-photo-h: 180px;
+    --footer-gap: 32px; --ind-col: 1fr;
+    --svc-head-pad-b: 32px; --svc-col: 1fr; --svc-gap: 32px;
+    --svc-verb-h: 44px; --svc-frame-h: 260px; --svc-row-pad: 28px; --svc-num-col: 40px;
+    --method-col: 1fr; --sch-h: 200px; --team-col: 1fr; --tile-h: 190px;
+    --q-head-col: 1fr; --q-col: 1fr;
+    --close-pad-t: 56px; --close-pad-b: 56px; --close-col: 1fr; --close-card-pad: 28px;
+
+    --gutter: 48px;   --header-h: 56px;
+    --hero-pad-top: 38px;  --hero-title-mt: 13px;
+    --hero-meta-gap: 32px; --hero-meta-mt: 26px; --hero-actions-gap: 22px; --hero-copy-w: none;
+    --proof-pad-t: 13px;   --proof-pad-b: 20px;   --stat-gap: 40px;
+
+    --r-control: 12px;     --r-panel: 13px;      --r-section: 24px;
+  }
+
+  .btn--primary { padding: 15px 26px; }
+  .btn--green   { padding: 12px 20px; }
+  .btn--cream   { padding: 12px 20px; }
+  .btn--lg      { padding: 17px 29px; }
+  .eyebrow::before { width: 40px; }
+  .eyebrow { gap: 14px; }
+
+  /* --- Header ----------------------------------------------------------- */
+  .nav-toggle { display: inline-flex; }
+
+  /* The panel must not become this menu's containing block. An inline
+     transform from any animation would do exactly that and trap the menu
+     inside the header; see the note by the header tween in script.js. */
+  .site-header__panel { transform: none !important; }
+
+  /* The sheet is a sibling of the wordmark and the toggle, and it paints
+     over both. Lift them above it, or the open menu covers its own close
+     button and the only ways out are Escape or following a link. */
+  .wordmark,
+  .nav-toggle { position: relative; z-index: 70; }
+
+  .nav {
+    position: fixed;
+    inset: 0;
+    z-index: 60;
+    display: none;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0;
+    background: var(--forest);
+    padding: calc(var(--header-h) + 24px) var(--gutter) 32px;
+    overflow-y: auto;
+    overscroll-behavior: contain;
+  }
+  .nav.is-open { display: flex; }
+  body.nav-locked { overflow: hidden; }
+
+  .nav__list {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0;
+    border-top: 1px solid var(--green-line);
+  }
+  .nav__item { border-bottom: 1px solid var(--green-line); }
+
+  .nav__link {
+    width: 100%;
+    justify-content: space-between;
+    padding-block: 18px;
+    font-family: var(--font-display);
+    font-size: var(--fs-h3);
+    font-weight: 500;
+    color: var(--cream);
+  }
+  .nav__link:hover,
+  .nav__link[aria-expanded="true"] { box-shadow: none; color: var(--clay-light); }
+  .nav__chev { width: 9px; height: 9px; }
+
+  /* Panels become accordions — no mega-menu on a small screen */
+  .mega {
+    position: static;
+    background: transparent;
+    box-shadow: none;
+    border-radius: 0;
+    opacity: 1;
+    visibility: visible;
+    transform: none;
+    display: none;
+  }
+  .mega.is-open { display: block; }
+
+  .mega__inner {
+    display: block;
+    padding: 0 0 22px;
+  }
+  .mega__col + .mega__col { margin-top: 22px; }
+  .mega__list strong { color: var(--cream); }
+  .mega__list span   { color: var(--on-forest-faint); }
+  .mega__col > .label { color: var(--on-forest-faint); }
+
+  .mega__offer {
+    background: rgba(247, 244, 238, 0.06);
+    padding: 22px;
+    margin-top: 22px;
+  }
+  .mega__offer p { color: var(--cream); }
+  .mega__offer .label--clay { color: var(--clay-light); }
+
+  /* The primary action is pinned to the foot of the sheet */
+  .nav__actions {
+    margin-top: auto;
+    padding-top: 32px;
+    flex-direction: column-reverse;
+    align-items: stretch;
+    gap: 16px;
+  }
+  .nav__actions .btn { width: 100%; padding-block: 16px; font-size: var(--fs-body); }
+  .nav__secondary { text-align: center; border-bottom: 0; }
+
+  /* --- Hero ------------------------------------------------------------- */
+  .hero__bg { height: 240px; margin-top: 32px; }
+  .hero__meta {
+    grid-template-columns: 1fr;
+    align-items: start;
+  }
+  .hero__actions { flex-direction: row; align-items: center; gap: 24px; flex-wrap: wrap; }
+  .hero__proof { gap: var(--stat-gap); }
+  .stat { gap: 14px; }
+  .stat__k { max-width: 150px; font-size: var(--fs-small); }
+}
+
+/* ==========================================================================
+   Mobile — 390
+   ========================================================================== */
+@media (max-width: 600px) {
+  :root {
+    --sec-pad-t: 36px; --sec-pad-b: 36px; --sec-gap: 22px;
+    --card-gap: 14px; --card-pad-x: 18px; --card-pad-y: 16px; --case-photo-h: 150px;
+    --footer-gap: 24px;
+    --svc-head-pad-b: 24px; --svc-gap: 22px;
+    --svc-verb-h: 32px; --svc-frame-h: 200px; --svc-row-pad: 22px; --svc-num-col: 32px;
+    --sch-h: 170px; --tile-h: 150px;
+    --close-pad-t: 40px; --close-pad-b: 40px; --close-card-pad: 22px;
+
+    --gutter: 20px;   --header-h: 54px;
+    --hero-pad-top: 20px;  --hero-title-mt: 8px;
+    --hero-meta-gap: 20px; --hero-meta-mt: 20px; --hero-actions-gap: 18px; --hero-copy-w: none;
+    --proof-pad-t: 8px;    --proof-pad-b: 12px;  --stat-gap: 24px;
+
+    --r-control: 12px;     --r-panel: 10px;      --r-section: 19px;
+  }
+
+  .eyebrow::before { width: 28px; }
+  .eyebrow { gap: 12px; }
+  .eyebrow span { line-height: 1.4; }
+
+  .hero__object { width: 150px; margin-top: 26px; }
+  :root { --icon-size: 28px; --belief-card-pad: 22px; }
+  .hero__bg { height: 170px; margin-top: 24px; }
+  .hero__actions { flex-direction: column; align-items: stretch; gap: 12px; }
+  .hero__actions .btn { width: 100%; padding-block: 15px; }
+  .hero__actions .link-quiet { text-align: center; }
+
+  /* Two stats stacked. They stay two — never padded to three. */
+  .hero__proof { flex-direction: column; align-items: flex-start; gap: 16px; }
+  .stat__k { max-width: none; }
+
+  .nav__link { padding-block: 14px; }
+  .nav { padding-top: calc(var(--header-h) + 16px); }
+}
+
+/* ==========================================================================
+   Coarse pointers — hover panels need a tap instead
+   ========================================================================== */
+@media (hover: none) {
+  .mega__list a:hover strong { text-decoration-color: transparent; }
+}
+
+/* ==========================================================================
+   Sections 02–08 — layout collapses
+   ========================================================================== */
+@media (max-width: 900px) {
+  .stories__head,
+  .team__head,
+  .questions__head { grid-template-columns: 1fr; align-items: start; gap: 24px; }
+
+  /* The four levers stack. The multiplication chip keeps its place on the
+     rule, so the arithmetic still reads top to bottom. */
+  .lever { grid-template-columns: 1fr; gap: 16px; }
+  .lever__text { max-width: none; }
+
+  .stories__grid { grid-template-columns: 1fr; }
+
+  /* The pinned column stops pinning and sits above the list */
+  .services__band { grid-template-columns: 1fr; }
+  /* No room to pin a column here, and a static one would show only the first
+     service's picture and then scroll away — which is what it used to do.
+     The verbs stay as the section's header; the frame goes, and each row
+     carries its own picture instead. */
+  .svc-media { position: static; padding-top: 0; }
+  .svc-media__frame { display: none; }
+  .svc__shot {
+    display: block;
+    margin-bottom: 18px;
+    border-radius: var(--r-panel);
+    overflow: hidden;
+    aspect-ratio: 16 / 10;
+  }
+  .svc__shot img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .svc__list { grid-template-columns: 1fr; gap: 12px; }
+
+  .method__body { grid-template-columns: 1fr; gap: 32px; }
+  .parts { grid-template-columns: 1fr; gap: 24px; }
+  .part--one { grid-template-columns: 1fr; gap: 12px; }
+
+  .questions__body { grid-template-columns: 1fr; gap: 28px; }
+  .close__inner { grid-template-columns: 1fr; gap: 32px; }
+
+  .footer__cols { grid-template-columns: 1fr 1fr; }
+  .ind { grid-template-columns: 1fr; gap: 8px; }
+  .footer__base { align-items: flex-start; }
+  .footer__legal { text-align: left; }
+}
+
+@media (max-width: 600px) {
+  .footer__cols { grid-template-columns: 1fr; }
+  .close__actions { flex-direction: column; align-items: stretch; gap: 16px; }
+  .close__actions .btn { width: 100%; }
+  .close__actions .link-quiet { text-align: center; }
+  .step { gap: 12px; }
+  .step__bar { display: none; }
+  .fq { grid-template-columns: 32px 1fr; gap: 12px; }
+  .pills { width: 100%; }
+  .pill { flex: 1 1 auto; text-align: center; }
+}
+
+/* ==========================================================================
+   Pricing page — token overrides and collapses
+   ========================================================================== */
+@media (max-width: 1600px) {
+  :root {
+    --hero-pad-top-page: 66px; --hero-meta-col-page: 570px; --step-strip-gap: 42px;
+    --mx-label-col: 225px; --close-form-col: 525px; --form-pad: 36px;
+  }
+  .deliv__grid { gap: 36px 48px; }
+}
+
+@media (max-width: 1366px) {
+  :root {
+    --hero-pad-top-page: 59px; --hero-meta-col-page: 507px; --step-strip-gap: 37px;
+    --mx-label-col: 200px; --close-form-col: 467px; --form-pad: 32px;
+  }
+}
+
+@media (max-width: 1150px) {
+  :root {
+    --hero-pad-top-page: 47px; --hero-meta-col-page: 406px; --step-strip-gap: 30px;
+    --mx-label-col: 160px; --close-form-col: 374px; --form-pad: 26px;
+  }
+  .deliv__grid { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (max-width: 900px) {
+  :root {
+    --hero-pad-top-page: 38px; --step-strip-gap: 20px;
+    --close-form-col: 1fr; --form-pad: 24px;
+  }
+
+  .hero__meta--page { grid-template-columns: 1fr; }
+  .hero__note { max-width: none; }
+  .steps-strip { flex-direction: column; align-items: flex-start; }
+  .stepline__sep { display: none; }
+
+  /* The matrix stops being a matrix. Four stacked cards, each carrying its
+     own row labels — a five-column grid at 768 would be unreadable, and a
+     horizontally scrolling table is worse. */
+  /* Stacked, the four cells under a row label lose the column that named
+     them. The package name comes back on each cell so the list still reads. */
+
+  .terms__grid { grid-template-columns: 1fr 1fr; }
+  .close__inner--form { grid-template-columns: 1fr; }
+}
+
+@media (max-width: 600px) {
+  .deliv__grid { grid-template-columns: 1fr; }
+  .terms__grid { grid-template-columns: 1fr; }
+  .auditform__grid { grid-template-columns: 1fr; }
+  .auditform .btn { width: 100%; }
+
+  /* The dialog takes the whole screen on a phone. Squaring off the corners
+     and dropping the outer margin is more honest than a card floating in a
+     6px gutter. */
+}
+
+/* ==========================================================================
+   Growth audit page — token overrides and collapses
+
+   The single rule this page must not break: the form stays in the first
+   screen. Above 900 that means it sits beside the headline and the headline
+   shrinks to make room. At 900 and below there is no room for two columns,
+   so the form moves under the headline and above everything else — which is
+   the same thing by other means.
+   ========================================================================== */
+@media (max-width: 1600px) {
+  :root {
+    --audit-form-col: 480px; --result-gap: 48px; --legal-toc-col: 255px; --legal-gap: 90px; --clause-gap: 48px; --step4-gap: 24px; --part-pad: 36px; --fit-gap: 60px; --midcta-pad: 78px; --belief-gap: 36px; --vs-key-col: 225px; --people-gap: 24px; --person-photo-h: 240px; --q-head-col2: 345px; --q-body-gap: 72px; --qgroup-gap: 66px; --story-photo-col: 465px; --story-pad: 42px; --story-gap: 30px; --embed-h: 340px; --who-photo-col: 315px; --who-photo-h: 390px; --ta-min: 80px; --audit-lede-gap: 72px; --how-gap: 36px;
+  }
+}
+
+@media (max-width: 1366px) {
+  :root {
+    --audit-form-col: 427px; --result-gap: 43px; --legal-toc-col: 227px; --legal-gap: 80px; --clause-gap: 43px; --step4-gap: 21px; --part-pad: 32px; --fit-gap: 53px; --midcta-pad: 69px; --belief-gap: 32px; --vs-key-col: 200px; --people-gap: 21px; --person-photo-h: 214px; --q-head-col2: 307px; --q-body-gap: 64px; --qgroup-gap: 59px; --story-photo-col: 413px; --story-pad: 37px; --story-gap: 27px; --embed-h: 300px; --who-photo-col: 280px; --who-photo-h: 347px; --ta-min: 72px; --audit-lede-gap: 64px; --how-gap: 32px;
+  }
+}
+
+@media (max-width: 1150px) {
+  :root {
+    --audit-form-col: 360px; --result-gap: 34px; --legal-toc-col: 181px; --legal-gap: 64px; --clause-gap: 34px; --step4-gap: 17px; --part-pad: 26px; --fit-gap: 42px; --midcta-pad: 55px; --belief-gap: 26px; --vs-key-col: 160px; --people-gap: 17px; --person-photo-h: 170px; --q-head-col2: 245px; --q-body-gap: 51px; --qgroup-gap: 47px; --story-photo-col: 330px; --story-pad: 30px; --story-gap: 22px; --embed-h: 260px; --who-photo-col: 225px; --who-photo-h: 278px; --ta-min: 64px; --audit-lede-gap: 48px; --how-gap: 26px;
+  }
+  /* Three how-steps still fit at 1024 — they are short. The audit contents
+     do not, so they take the same two-column collapse as the pricing page. */
+}
+
+@media (max-width: 900px) {
+  :root {
+    --audit-lede-gap: 40px;
+  }
+
+  /* One column, and the three blocks re-sequence: copy, then the form, then
+     the reassurances. The form has to stay as close to the headline as the
+     viewport allows — four bullets between them would push it off screen. */
+  .audit-lede { grid-template-columns: 1fr; row-gap: 32px; }
+  .audit-lede__copy { grid-column: 1; grid-row: auto; order: 1; }
+  .auditform--lede  { grid-column: 1; grid-row: auto; order: 2; }
+  .ticks            { grid-column: 1; grid-row: auto; order: 3; }
+
+  .hero__title--audit { max-width: none; }
+  .audit-lede__sub { max-width: none; }
+
+  .hows { grid-template-columns: 1fr; gap: 28px; }
+}
+
+@media (max-width: 600px) {
+  .ticks { gap: 10px; }
+  .notthis { padding: 24px 22px; }
+  .auditform--lede .btn { width: 100%; }
+}
+
+/* ==========================================================================
+   Call page — collapses
+
+   The lede itself needs nothing: it is the growth audit's grid, so the block
+   above already reorders it to copy → booker → reassurances at 900.
+   ========================================================================== */
+@media (max-width: 1150px) {
+  /* The call page's four "what we cover" columns carry twice the words of
+     the pricing page's terms, so they stop being readable before the grid
+     stops fitting. Scoped to .band so the approved pricing layout, which is
+     fine at four across down to 900, is left alone. */
+  .band--forest .terms__grid { grid-template-columns: 1fr 1fr; }
+  .who { gap: 48px; }
+}
+
+@media (max-width: 900px) {
+  :root { --embed-h: 380px; --who-photo-h: 320px; }
+
+  /* The booker takes the audit form's slot in the reordered single column */
+  .booker { grid-column: 1; grid-row: auto; order: 2; }
+
+  .who { grid-template-columns: 1fr; gap: 28px; }
+  .who__photo { height: var(--who-photo-h); }
+  .who__facts { gap: 12px 48px; }
+}
+
+@media (max-width: 600px) {
+  :root { --embed-h: 320px; }
+
+  /* The .band--forest .terms__grid rule above is two classes deep, so it
+     beats the single-class `.terms__grid { 1fr }` in the pricing block and
+     leaves these two-up at 390. Restated here at matching specificity. */
+  .band--forest .terms__grid { grid-template-columns: 1fr; }
+
+  .booker__alt-text { font-size: var(--fs-body); }
+  .who__facts { gap: 16px 32px; }
+}
+
+/* ==========================================================================
+   Success stories page — collapses
+   ========================================================================== */
+@media (max-width: 1150px) {
+  /* Four stats will not hold their labels at 1024 — two rows of two */
+  .hero__proof--four { grid-template-columns: 1fr 1fr; gap: 20px 40px; }
+}
+
+@media (max-width: 900px) {
+  :root { --story-pad: 28px; }
+
+  /* Photo above the copy, not beside it. A 620px column has nowhere to go
+     at 768 and shrinking it to a strip makes the kitchen unreadable. */
+  .story { grid-template-columns: 1fr; }
+  .story__photo { min-height: 240px; order: -1; }
+  .story__copy { gap: 22px; }
+  /* The measure stays: --sub-w is fluid and already gives way to 100% on a
+     narrow screen, so releasing it here only made this one subheading run
+     wider than its heading below 900px. */
+  .stories__note { align-self: start; }
+  .hows--onforest { gap: 28px; }
+}
+
+@media (max-width: 600px) {
+  .hero__proof--four { grid-template-columns: 1fr; gap: 18px; }
+  .hero__proof--four .stat__k { max-width: none; }
+  .story__head { gap: 14px; }
+  .story__photo { min-height: 190px; }
+  .tags li { padding: 6px 10px; }
+}
+
+/* ==========================================================================
+   Questions page — collapses
+   ========================================================================== */
+@media (max-width: 900px) {
+  :root { --qgroup-gap: 40px; }
+
+  /* The heading stops being a column and becomes a header. Sticky is
+     pointless once it is above the questions rather than beside them. */
+  .qgroup { grid-template-columns: 1fr; gap: 28px; }
+  .qgroup__head { position: static; }
+  .qgroup__note { max-width: none; }
+  .qgroup + .qgroup { padding-top: 40px; }
+
+  .jumpto { flex-direction: column; align-items: flex-start; gap: 12px; }
+}
+
+@media (max-width: 600px) {
+  /* The number column costs 40px of a 350px line. The answer indent goes
+     with it — at this width the rule above each question is enough to
+     separate them. */
+  .qi__q { grid-template-columns: 1fr 20px; gap: 12px; padding: 18px 0; }
+  .qi__n { display: none; }
+  .qi__a { padding: 0 0 22px; }
+  .jumpto ul { gap: 10px 20px; }
+}
+
+/* ==========================================================================
+   About page — collapses
+   ========================================================================== */
+@media (max-width: 1150px) {
+  .beliefs { grid-template-columns: 1fr 1fr; }
+  /* Two columns here, so the twelve-track spans have to be reset or a
+     span-3 card would take a quarter of a two-column row. */
+  .beliefs--icons { grid-template-columns: 1fr 1fr; }
+  .beliefs--icons .how,
+  .beliefs--n7 .how,
+  .beliefs--n7 .how:nth-child(n+5),
+  .beliefs--n5 .how:nth-child(n+4) { grid-column: auto; }
+  .people  { grid-template-columns: 1fr 1fr; }
+}
+
+@media (max-width: 900px) {
+  :root { --person-photo-h: 260px; }
+
+  .beliefs { grid-template-columns: 1fr; gap: 28px; }
+  .beliefs--icons { grid-template-columns: 1fr; }
+  .offices { grid-template-columns: 1fr; }
+  .stat--wide .stat__k { max-width: none; }
+
+  /* The comparison stops being three columns. Each row becomes a labelled
+     pair, stacked — a three-column grid at 768 gives each answer about
+     fourteen characters a line. */
+  .vs__row { grid-template-columns: 1fr; gap: 10px; padding: 20px 0; }
+  .vs__row--head { display: none; }
+  .vs__a::before,
+  .vs__b::before {
+    display: block;
+    font-family: var(--font-mono);
+    font-size: var(--fs-small);
+    letter-spacing: 0.02em;
+    margin-bottom: 4px;
+  }
+  .vs__a::before { content: "Usually"; color: var(--ink-faint); }
+  .vs__b::before { content: "RankinAI"; color: var(--clay); }
+  .vs__b { border-left: 0; padding-left: 0; border-top: 1px solid var(--hairline); padding-top: 12px; }
+}
+
+@media (max-width: 600px) {
+  :root { --person-photo-h: 300px; }
+  .people { grid-template-columns: 1fr; }
+}
+
+/* ==========================================================================
+   Service pages — collapses
+   ========================================================================== */
+@media (max-width: 1150px) {
+  .hows--four { grid-template-columns: 1fr 1fr; }
+}
+
+@media (max-width: 900px) {
+  :root { --fit-gap: 28px; --midcta-pad: 48px; }
+
+  .hows--four,
+  .hows--three { grid-template-columns: 1fr; gap: 28px; }
+
+  /* Stacked, so the rule down the inside edge becomes a rule across the top
+     and the two paddings that held it come off. */
+  .midcta__inner { grid-template-columns: 1fr; gap: 32px; }
+  .midcta__line { max-width: none; }
+  .midcta__say { padding-right: 0; }
+  .midcta__act {
+    padding-left: 0;
+    padding-top: 32px;
+    border-left: 0;
+    border-top: 1px solid rgba(247, 244, 238, 0.22);
+    align-self: stretch;
+  }
+
+  /* The two panels stack. They keep their own borders now, so there is no
+     divider rule to convert. */
+  .fit { grid-template-columns: 1fr; gap: 20px; }
+  .chans { grid-template-columns: 1fr; gap: 20px; }
+  .figs  { grid-template-columns: 1fr; gap: 16px; }
+  .calc  { grid-template-columns: 1fr; }
+  .calc__head { grid-row: auto; }
+  .calc__cta  { grid-column: 1; }
+
+  /* Four columns of comparison will not fit. Each row becomes a labelled
+     stack, same treatment the About page's two-column version gets. */
+  .vs--three .vs__row { grid-template-columns: 1fr; }
+  .vs--three .vs__a:nth-of-type(2)::before { content: "Doing nothing"; }
+  .vs--three .vs__a:nth-of-type(3)::before { content: "In-house"; }
+  .vs--onforest .vs__a::before { color: var(--on-forest-faint); }
+  .vs--onforest .vs__b::before { color: var(--clay-light); }
+  .vs--onforest .vs__b { border-top-color: #33513F; }
+}
+
+@media (max-width: 600px) {
+  /* The button is already full-width in its column from 601px up. */
+  .midcta__act { padding-top: 26px; }
+}
+
+/* ==========================================================================
+   Industry pages — collapses
+   ========================================================================== */
+@media (max-width: 1366px) {
+  /* Five 200px columns stop being readable before they stop fitting */
+  .hows--five { grid-template-columns: repeat(3, 1fr); }
+}
+
+@media (max-width: 900px) {
+  .hows--five { grid-template-columns: 1fr 1fr; gap: 24px; }
+}
+
+@media (max-width: 600px) {
+  .hows--five { grid-template-columns: 1fr; }
+}
+
+@media (max-width: 900px) { .hows--two { grid-template-columns: 1fr; gap: 28px; } }
+
+/* ==========================================================================
+   How we work / contact — collapses
+   ========================================================================== */
+@media (max-width: 1150px) {
+  .timeline { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (max-width: 900px) {
+  .steps4  { grid-template-columns: 1fr; gap: 28px; }
+  .parts   { grid-template-columns: 1fr; }
+  .routes  { grid-template-columns: 1fr; }
+  .timeline { grid-template-columns: 1fr; gap: 24px; }
+}
+
+@media (max-width: 600px) {
+  .part2__facts > div { flex-direction: column; gap: 4px; }
+  .part2__facts dd { text-align: left; }
+}
+
+/* ==========================================================================
+   Legal pages — collapses
+   ========================================================================== */
+@media (max-width: 900px) {
+  :root { --clause-gap: 40px; }
+
+  /* The contents becomes a list at the top rather than a column beside */
+  .legal { grid-template-columns: 1fr; gap: 40px; }
+  .legal__toc { position: static; }
+  .legal__meta { gap: 32px; }
+  .clause__row { grid-template-columns: 1fr; gap: 4px; padding: 14px 0; }
+  .clause__row--head { display: none; }
+}
+
+@media (max-width: 600px) {
+  .draftbar { padding: 18px 18px; }
+}
+
+/* ==========================================================================
+   Story pages — collapses
+   ========================================================================== */
+@media (max-width: 1150px) {
+  .storymeta { grid-template-columns: repeat(2, auto); gap: 24px 60px; }
+}
+
+@media (max-width: 900px) {
+  .storymeta { grid-template-columns: 1fr; gap: 18px; }
+  .results   { grid-template-columns: 1fr; gap: 24px; }
+  .situation { grid-template-columns: 1fr; gap: 28px; }
+  .storyshot { height: 240px; }
+  .pullquote { max-width: none; text-align: left; }
+}
+
+/* ==========================================================================
+   Sitemap — collapses
+   ========================================================================== */
+@media (max-width: 1150px) {
+  .smrow { grid-template-columns: 28px minmax(0, 1fr) auto; gap: 14px; }
+  .smrow__flags { grid-column: 2 / -1; margin-top: 6px; }
+  .smrow__open  { grid-row: 1; grid-column: 3; }
+}
+
+@media (max-width: 600px) {
+  .smrow { grid-template-columns: 24px minmax(0, 1fr); row-gap: 8px; }
+  .smrow__open { grid-row: auto; grid-column: 2; justify-self: start; }
+  .smrow__flags { grid-column: 2; }
+}
+
+/* Success story detail ---------------------------------------------------- */
+@media (max-width: 900px) {
+  .overview { grid-template-columns: 1fr; gap: 32px; }
+  .flow__item { grid-template-columns: 1fr; gap: 10px; }
+  .flow__n    { padding-top: 0; }
+
+  .results, .results--2 { grid-template-columns: 1fr; }
+  .pend__s { margin-left: 0; flex-basis: 100%; }
+
+}
+
+/* --------------------------------------------------------------------------
+   About: the two frames under the vision statement
+
+   35/65 holds while the narrow frame is still wide enough to show a person.
+   Below that it stacks and both frames shorten.
+   -------------------------------------------------------------------------- */
+@media (max-width: 900px) {
+  .mv { grid-template-columns: 1fr; gap: 36px; }
+  .trades { grid-template-columns: 1fr; gap: 36px; }
+  .deliv__grid--promise { grid-template-columns: 1fr; }
+  .visionpics { grid-template-columns: 1fr; }
+  .visionpics img { height: clamp(200px, 44vw, 300px); }
+
+  /* The argument drops under the principle, but the icon keeps its gutter
+     so the left edge of the type stays straight. */
+  .creed__item {
+    grid-template-columns: var(--creed-icon-col) minmax(0, 1fr);
+    row-gap: 12px;
+  }
+  .creed__text { grid-column: 2; }
+
+  /* Two cards on a tablet, one and a bit on a phone, so the next face is
+     always half visible and the track reads as something you can move. */
+  :root { --person-col: calc((100% - var(--people-gap)) / 2); }
+}
+
+@media (max-width: 600px) {
+  :root { --person-col: 78%; }
+  .teamnav { justify-content: flex-start; }
+}
+
+/* --------------------------------------------------------------------------
+   Home page components added with the September 2026 copy rewrite
+   -------------------------------------------------------------------------- */
+@media (max-width: 900px) {
+  .plan { grid-template-columns: 1fr; gap: 24px; }
+  .plan__actions { grid-column: 1; gap: 24px; }
+  /* .close__tagline--ask no longer needs a size here: it is derived from the
+     two steps either side of it and scales with them. */
+}
+
+/* --------------------------------------------------------------------------
+   Home revisions and the restructured footer
+   -------------------------------------------------------------------------- */
+@media (max-width: 1150px) {
+  :root { --card-col: calc((100% - var(--card-gap)) / 2); }
+}
+
+@media (max-width: 900px) {
+  /* The claim and its working out stack. Nothing else changes: both columns
+     already cap themselves, so they simply take the full width in turn. */
+  .why { grid-template-columns: 1fr; }
+  .why__head { padding-top: 0; }
+
+  /* The thinking and the rules stack. Both cap themselves, so they simply
+     take the full width in turn. */
+  .think { grid-template-columns: 1fr; gap: 40px; }
+  .think__say { max-width: none; }
+
+  /* Five short phrases in a row need more width than this. */
+  .needs__list { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 28px; }
+  /* The heading and the thinking stack, and so do the two searches and the
+     conclusion drawn from them. */
+  .approach,
+  .says  { grid-template-columns: 1fr; gap: 32px; }
+  .asks  { grid-template-columns: 1fr; }
+  .says__body { max-width: none; }
+  .approach__title { margin-top: 0; }
+  .approach__say { max-width: none; }
+
+  /* The two routes and the three direct details stack. */
+  .routes { grid-template-columns: 1fr; }
+  .direct { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 28px; }
+
+  /* The questions and the audit stack. */
+  .begin { grid-template-columns: 1fr; gap: 40px; }
+  .begin__step { max-width: none; }
+
+  /* Below this there is no room for half a card beside a readable one, so the
+     peek drops to a strip: enough to say the track moves, not enough to
+     squeeze the card being read. */
+  :root { --pcard-w: calc(100vw - var(--gutter) - 56px); }
+
+  /* Four cards across is too narrow below this. Two and two. */
+  .wcards,
+  .wcards--three,
+  .wcards--five,
+  .chans,
+  .chans--three { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+
+  /* The journey chevrons only mean anything on one line. */
+  .wcards--journey .wcard + .wcard::after { display: none; }
+
+  /* A plan stacks, and the identity block stops sticking: there is nothing
+     beside it to stay level with once it is on its own line. */
+  .plan2 { grid-template-columns: 1fr; gap: 28px; }
+  .deliv__grid--plan { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 28px; }
+  .starts { grid-template-columns: 1fr; }
+
+  .footer__top { grid-template-columns: 1fr; gap: 32px; }
+  .footer__cols { grid-template-columns: repeat(2, 1fr); }
+  .hero--centred .hero__title { max-width: none; }
+}
+
+@media (max-width: 600px) {
+  :root { --card-col: 82%; }
+  /* One card at a time on a phone. This has to live after the 900px rule
+     above, or that one wins at every width below it. */
+  .wcards,
+  .wcards--three,
+  .wcards--five,
+  .chans,
+  .chans--three { grid-template-columns: 1fr; }
+  .deliv__grid--plan { grid-template-columns: 1fr; }
+  .direct { grid-template-columns: 1fr; }
+  .needs__list { grid-template-columns: 1fr; }
+  .footer__cols { grid-template-columns: 1fr; }
+  .hero--centred .hero__actions { flex-direction: column; gap: 18px; }
+  .cardslider .teamnav { justify-content: flex-start; }
+}
+
+@media (max-width: 600px) {
+  .plan__marks { flex-direction: column; align-items: center; gap: 8px; }
+  .plan__marks li + li::before { display: none; }
+  .plan__actions { flex-direction: column; align-items: stretch; }
+  .plan__actions .btn { justify-content: center; }
+}
+
+/* The success story's four moves and the before-and-after pair stack. */
+@media (max-width: 900px) {
+  .moveset__item {
+    grid-template-columns: 1fr;
+    grid-template-areas: "n" "body" "ba";
+    row-gap: 22px;
+  }
+  .moveset__name { margin-top: 14px; }
+  .ba { grid-template-columns: 1fr; }
+}
+@media (max-width: 600px) {
+  .ctable th,
+  .ctable td { padding: 12px 12px; }
+}
+
+/* The blog. Three cards become two, then one, and the pull quote and takeaway
+   box stop stepping outside a column that no longer has room for it. */
+@media (max-width: 900px) {
+  .postgrid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .pull,
+  .take { margin-left: 0; margin-right: 0; }
+}
+@media (max-width: 600px) {
+  .postgrid,
+  .postgrid--two,
+  .postgrid--four { grid-template-columns: 1fr; }
+  .take { padding: 24px 22px; }
+}
+
+/* The search box and the topic row stack, and the search takes the full width
+   it gains. */
+@media (max-width: 900px) {
+  .finder { grid-template-columns: 1fr; gap: 34px; }
+}
+@media (max-width: 600px) {
+  .bsearch__row { flex-direction: column; }
+  .bsearch__go { align-self: flex-start; }
+  .noresults { padding: 26px 22px; }
+}
+
+/* The article table stops stepping outside a column that no longer has room
+   for it, and scrolls sideways inside its own box instead. */
+@media (max-width: 900px) {
+  .atable { margin-left: 0; margin-right: 0; }
+}
+
+/* The featured picture goes above the words rather than beside them. */
+@media (max-width: 900px) {
+  .feature--img { grid-template-columns: 1fr; gap: 32px; }
+  .feature__img { aspect-ratio: 16 / 9; }
+}
+
+/* The rail stops being a rail: the contents and the offer sit above the
+   article, and the breakout elements stop breaking out. */
+@media (max-width: 1100px) {
+  /* minmax(0, 1fr), not 1fr. A bare 1fr is minmax(auto, 1fr), and the article
+     contains a table whose min-content width is wider than a phone, so the
+     column refused to shrink and the whole layout overflowed. */
+  .longread { grid-template-columns: minmax(0, 1fr); gap: 40px; }
+  .postgrid--four { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  /* The panel stays a panel, but it lies down: contents on the left, the offer
+     on the right, divided by a vertical hairline instead of a horizontal one.
+     The height cap and the inner scroll both come off, because nothing is
+     sticky here and the list has the whole page to use. */
+  .rail {
+    position: static;
+    flex-direction: row;
+    flex-wrap: wrap;
+    max-height: none;
+    overflow: visible;
+  }
+  /* min-height: auto and flex: none, or the list keeps the shrink behaviour it
+     needs while the rail is sticky and gets squeezed to half its content here,
+     clipping the last six sections behind the offer below it. */
+  .toc { flex: 1 1 340px; min-height: auto; }
+  .toc__list { overflow: visible; max-height: none; flex: none; }
+  .railcta {
+    flex: 1 1 300px;
+    border-top: 0;
+    border-left: 1px solid var(--hairline-warm);
+  }
+}
+@media (max-width: 900px) {
+  .afig { margin-left: 0; margin-right: 0; }
+  /* Back to a column, so the divider goes back to being horizontal. */
+  .rail { flex-direction: column; }
+  .railcta { border-left: 0; border-top: 1px solid var(--hairline-warm); }
+}
+
+/* The four related cards: two across on a tablet, one on a phone.
+
+   This sits at the end of the file on purpose. The two-column rule for
+   .postgrid--four lives in the 1100px block above, which is declared after the
+   earlier 600px block, so a phone was getting two 160px cards and the reading
+   time was running off the side of them. Same specificity, so the later rule
+   has to be the narrower one. */
+@media (max-width: 600px) {
+  .postgrid--four { grid-template-columns: 1fr; }
+}
+
+/* The audit form's two fields stack once there is no room beside each other. */
+@media (max-width: 700px) {
+  .afx__fields { grid-template-columns: 1fr; }
+}
+
+/* --------------------------------------------------------------------------
+   Footer in one row, 28 Sep 2026
+
+   The about block, the three link columns and the contact details share a
+   single row. Everything is here, at the end of the file, so it comes after
+   every older .footer__cols rule above and wins at each width. The about
+   block takes its own full-width line once four columns beside it would
+   squeeze the links.
+   -------------------------------------------------------------------------- */
+.footer__cols.footer__cols--row {
+  grid-template-columns: minmax(0, 1.5fr) repeat(3, minmax(0, 1.15fr)) minmax(0, 1.1fr);
+  column-gap: min(var(--footer-gap), 32px);
+  align-items: start;
+}
+.footer__cols--row > * { min-width: 0; }
+.footer__cols--row .footer__about { max-width: 42ch; }
+.footer__cols--row .footer__contact a { overflow-wrap: anywhere; }
+
+@media (max-width: 1320px) {
+  .footer__cols.footer__cols--row { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+  .footer__cols--row .footer__about { grid-column: 1 / -1; max-width: 58ch; }
+}
+
+@media (max-width: 900px) {
+  .footer__cols.footer__cols--row { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+
+@media (max-width: 600px) {
+  .footer__cols.footer__cols--row { grid-template-columns: minmax(0, 1fr); }
+}
+
+/* The copyright line sits centred under a hairline, the same rule the old
+   top row used, so the link row and the base read as two parts. Here at the
+   end so it beats the left-aligned narrow-screen rule above. */
+.footer__base {
+  justify-content: center;
+  align-items: center;
+  padding-top: 24px;
+  border-top: 1px solid var(--hairline);
+}
+.footer__legal { text-align: center; }
+
+/* The service hero, 28 Sep 2026. Base rules are at the end of style.css.
+   Below 900px the object drops under the copy, and on a phone the offset
+   block and the card pull inside the frame so nothing pushes past the
+   gutter and scrolls the page sideways. */
+@media (max-width: 1100px) {
+  .hero--service .hero__inner { grid-template-columns: minmax(0, 1fr) minmax(0, 0.8fr); column-gap: 48px; }
+  .svc-hero__group { left: -20px; }
+}
+
+@media (max-width: 900px) {
+  .hero--service .hero__inner { grid-template-columns: minmax(0, 1fr); }
+  .hero--service .hero__title { font-size: var(--fs-h1); }
+  .svc-hero__visual { justify-self: start; max-width: 480px; margin-top: 56px; }
+  .svc-hero__group { left: 20px; }
+}
+
+@media (max-width: 600px) {
+  .svc-hero__visual { margin-top: 44px; padding-bottom: 72px; }
+  .svc-hero__visual::before { inset: 16px -12px 96px 16px; }
+  .svc-hero__group { left: 12px; width: calc(100% - 24px); padding: 18px 20px; }
+}
+
+/* The industry hero, 28 Sep 2026. Base rules are at the end of style.css.
+   Below 900px the head stacks. Below 700px the photo goes to a taller crop
+   and the group card comes out from over it to sit underneath, where it no
+   longer hides most of a small picture. */
+@media (max-width: 900px) {
+  .ind-hero__head { grid-template-columns: minmax(0, 1fr); row-gap: 28px; }
+  .hero--industry .hero__title { font-size: var(--fs-h1); }
+  .ind-hero__photo { aspect-ratio: 16 / 9; }
+  .ind-hero__group { left: 20px; bottom: 20px; }
+}
+
+@media (max-width: 700px) {
+  .ind-hero__photo { aspect-ratio: 4 / 3; }
+  .ind-hero__group { position: static; width: auto; margin-top: 20px; }
+}
+
+/* The short hero, 28 Sep 2026. The blog index only. Less padding top and
+   bottom and a smaller headline on one line where it fits, with no intro
+   under it, so the topics and the articles start near the top of the screen. */
+.hero--short .hero__inner {
+  padding-block: calc(var(--hero-pad-top) * 1.4) calc(var(--sec-pad-b) * 1.3);
+}
+.hero--short .hero__title { font-size: min(var(--fs-h1), max(34px, calc(10px + 3vw))); }
+
+/* The topic row on its own, once the search box beside it came off. */
+.finder.finder--solo { grid-template-columns: minmax(0, 1fr); margin-top: 0; }
+.finder--solo .filters { margin-top: 0; }
+
+/* The topics band sits tight between the short hero and the first articles.
+   Its top keeps the --r-section the band is pulled up under the hero's foot,
+   plus a little. The band after it is the same light ground, so it drops the
+   pull-up and most of its top padding: there is no edge to clear. */
+main > section.band.band--topics:not(:first-of-type) { padding-top: calc(var(--r-section) + 28px); padding-bottom: 24px; }
+main > section.band--topics + section.band:not(:first-of-type) { margin-top: 0; padding-top: 40px; }
+.finder--solo .browse { text-align: center; }
+.finder--solo .filters { justify-content: center; }
+
+/* The about hero, 28 Sep 2026. Base rules are at the end of style.css.
+   Below 900px the collage drops under the copy. On a phone the office card
+   comes in from the edge so it cannot push past the gutter. */
+@media (max-width: 900px) {
+  .hero--about .hero__inner { grid-template-columns: minmax(0, 1fr); }
+  .hero--about .hero__title { font-size: var(--fs-h1); }
+  .about-hero__collage { margin-top: 56px; max-width: 560px; }
+  .about-hero__place { left: 16px; }
+}
+@media (max-width: 600px) {
+  .about-hero__collage { gap: 10px; margin-top: 40px; }
+  .about-hero__shot--low { margin-top: 24px; margin-bottom: -24px; }
+  .about-hero__place { left: 12px; bottom: 48px; padding: 14px 18px; }
+}
+
+/* The service photographs, from Unsplash since 28 Sep 2026, take the same
+   tone-down as the industry and blog photographs so they sit under the
+   palette. */
+.svc-hero__frame img { filter: saturate(0.72) contrast(1.02); }
+
+/* The split argument block, 28 Sep 2026. Base rules at the end of style.css.
+   Below 900px the photograph drops under the prose at a wider crop, and the
+   cards fall to two across, then one. */
+@media (max-width: 900px) {
+  .split { grid-template-columns: minmax(0, 1fr); }
+  .split__photo { aspect-ratio: 16 / 10; margin-top: var(--sec-gap); }
+  .hows--cards.hows--four,
+  .hows--cards.hows--three { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (max-width: 600px) {
+  .hows--cards.hows--four,
+  .hows--cards.hows--three,
+  .hows--cards.hows--two { grid-template-columns: minmax(0, 1fr); }
+}
+
+/* How we start on tan, 28 Sep 2026. Below 900px the photograph goes above
+   the heading at a wider crop. */
+@media (max-width: 900px) {
+  .start { grid-template-columns: minmax(0, 1fr); }
+  .start__photo { aspect-ratio: 16 / 10; margin-bottom: var(--sec-gap); }
+}
+@media (max-width: 600px) {
+  .start__step { grid-template-columns: 36px minmax(0, 1fr); gap: 12px; padding: 18px 0; }
+}
+
+/* The how-we-work hero, 28 Sep 2026. Below 900px the photograph goes under
+   the copy, still bleeding to the right edge, and the steps card comes out
+   from over it to sit beneath, back inside the gutter. */
+@media (max-width: 900px) {
+  .hero--work .hero__inner { grid-template-columns: minmax(0, 1fr); }
+  .hero--work .hero__title { font-size: var(--fs-h1); }
+  .work-hero__visual { margin-top: 48px; }
+  .work-hero__photo { height: clamp(300px, 56vw, 460px); }
+  .work-hero__steps { position: static; width: auto; margin: 16px var(--gutter) 0 0; }
+}
+
+/* Contact page images, 28 Sep 2026. Below 900px the message form drops under
+   the photograph and the office photograph under the details. These come
+   last so they beat the older .direct rules at the same widths. */
+@media (max-width: 900px) {
+  .msg { grid-template-columns: minmax(0, 1fr); }
+  .msg > .auditform,
+  .msg > .wpcf7 { margin-top: var(--sec-gap); }
+  .reach { grid-template-columns: minmax(0, 1fr); row-gap: var(--sec-gap); }
+  .reach .direct { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (max-width: 600px) {
+  .reach .direct { grid-template-columns: minmax(0, 1fr); }
+}
+
+/* The compare section with a photograph, 29 Sep 2026. Below 900px the head
+   and body stack, the photograph under the heading at a capped width. */
+@media (max-width: 900px) {
+  .cmp__head,
+  .cmp__body { grid-template-columns: minmax(0, 1fr); row-gap: 28px; }
+  .cmp__photo { max-width: 480px; }
+}
+
+/* The contact page, shortened 29 Sep 2026. A compact centred hero, and
+   flatter crops on the three contact photographs. Here at the end so these
+   beat the base rules for the same selectors. */
+.hero--compact .hero__inner {
+  padding-block: calc(var(--hero-pad-top) * 0.7) calc(var(--sec-pad-b) * 0.7);
+}
+.hero--compact .hero__title { font-size: min(var(--fs-h1), max(34px, calc(10px + 3.4vw))); }
+.hero--compact .hero__meta { margin-top: 24px; }
+.route__img { aspect-ratio: 21 / 9; }
+.msg__photo { aspect-ratio: 16 / 10; }
+.reach__photo { aspect-ratio: 2 / 1; }
+
+/* On a phone the message photograph pushes the form a full screen down the
+   page. It is decorative, so it goes, and the form follows the invitation. */
+@media (max-width: 600px) {
+  .msg__photo { display: none; }
+}
+
+/* The flipped split and the list cards, 29 Sep 2026. Below 900px the photo
+   goes back under the copy like the plain split, and the cards run two
+   across, then one. */
+@media (max-width: 900px) {
+  .split--flip { grid-template-columns: minmax(0, 1fr); }
+  .split--flip .split__photo { order: 0; }
+  .needs--cards .needs__list { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (max-width: 600px) {
+  .needs--cards .needs__list { grid-template-columns: minmax(0, 1fr); }
+}
+
+/* Four list cards sit two by two rather than three and an orphan. */
+.needs--cards .needs__list--four { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+@media (max-width: 600px) {
+  .needs--cards .needs__list--four { grid-template-columns: minmax(0, 1fr); }
+}
+
+/* The flipped split carries a short copy column (a heading and one line), so
+   a tall 4:5 photograph left it floating in empty space. Landscape here, in a
+   slightly narrower column, 29 Sep 2026. */
+.split--flip { grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr); }
+.split--flip .split__photo { aspect-ratio: 4 / 3; }
+@media (max-width: 900px) {
+  .split--flip { grid-template-columns: minmax(0, 1fr); }
+  .split--flip .split__photo { aspect-ratio: 16 / 10; }
+}
+.split--flip .split__photo { width: 100%; max-width: 520px; }
+
+/* The brief block, 29 Sep 2026. One column below 900px. */
+@media (max-width: 900px) {
+  .brief { grid-template-columns: minmax(0, 1fr); row-gap: var(--sec-gap); }
+}

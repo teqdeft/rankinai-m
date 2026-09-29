@@ -1,0 +1,11 @@
+/*
+Theme Name: RankinAI
+Theme URI: https://rankinai.com
+Author: RankinAI
+Description: Custom theme for RankinAI. A port of the flat-file build at the repo root, on the Sokkies pattern: pages are built from sections with ACF Flexible Content, every field falls back to the original content when left empty, and all fields are registered in code.
+Version: 0.1.0
+Requires PHP: 7.4
+Text Domain: rankinai
+*/
+/* The real styles are in assets/css: reset.css, then style.css, then
+   responsive.css. The enqueue order in functions.php is load-bearing. */

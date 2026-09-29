@@ -1,0 +1,13 @@
+# Local WordPress config (secrets and local DB details), see wp-config.example.php
+wp-config.php
+
+# Local admin login for the dev install, never committed
+LOCAL-LOGIN.txt
+
+# Media uploads are content, not code
+wp-content/uploads/
+
+# Logs and system files
+*.log
+.DS_Store
+Thumbs.db

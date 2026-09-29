@@ -1,0 +1,14 @@
+# BEGIN WordPress
+# Written for Apache (MAMP) with the repo root as document root, so the site
+# runs at /rankinai-local/. WordPress rewrites this block when permalinks are
+# saved; if the site lives at a different path, save permalinks once.
+<IfModule mod_rewrite.c>
+RewriteEngine On
+RewriteRule .* - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization}]
+RewriteBase /rankinai-local/
+RewriteRule ^index\.php$ - [L]
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule . /rankinai-local/index.php [L]
+</IfModule>
+# END WordPress
