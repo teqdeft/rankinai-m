@@ -87,7 +87,7 @@ jobs:
           server: ${{ secrets.FTP_SERVER }}
           username: ${{ secrets.FTP_USERNAME }}
           password: ${{ secrets.FTP_PASSWORD }}
-          protocol: ftps                  # change to "ftp" if FTPS stalls on your host
+          protocol: ftp                  # change to "ftp" if FTPS stalls on your host
           port: 21
           local-dir: ./                   # the repository root is the WordPress root
           # Main cPanel login: /public_html/
