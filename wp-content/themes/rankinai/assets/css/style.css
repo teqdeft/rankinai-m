@@ -325,7 +325,7 @@
   --belief-gap:          48px;
   --vs-key-col:         300px;
   --people-gap:          32px;
-  --person-photo-h:     320px;
+  --person-photo-h:     460px;
   --t-person: var(--fs-h4);
 
   /* Service pages */
@@ -3197,7 +3197,13 @@ html.lenis body { height: auto; }
   border-radius: var(--r-panel);
   overflow: hidden;
   margin-bottom: 8px;
+  /* One row the height of the frame. Without it the grid row sizes to the
+     photo, height: 100% resolves against the photo's own height, and a
+     portrait taller than the frame (600 by 800) lost its lower third. */
+  grid-template-rows: minmax(0, 1fr);
 }
+/* Portraits crop from high up, where the face is, not from the middle. */
+.person__photo img { object-position: 50% 20%; }
 .person__name {
   font-family: var(--font-display);
   font-weight: 500;

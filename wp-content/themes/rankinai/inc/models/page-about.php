@@ -6,12 +6,9 @@
  * in the hero card is the site setting ($SITE['offices']), as on the flat
  * build.
  *
- * THE PEOPLE. Read the note at the top of the flat build's about.php before
- * adding anyone: their own LinkedIn headline has to say RankinAI. Abhishek
- * Thakur's and Rahul Verma's years and project counts are placeholder values
- * Kulwant asked for (logged in CLAIMS.md). A person with no portrait renders
- * a name plate. team-kulwant and team-reena are named for when the files
- * land in assets/images, as on the flat build.
+ * THE PEOPLE are team members, their own post type (inc/models/team.php),
+ * listed under this page's "Meet the team" heading in their Order. This page
+ * holds only the heading, the note and the card labels.
  */
 if ( ! defined( 'ABSPATH' ) ) { exit; }
 
@@ -56,10 +53,9 @@ return array(
 			'cards'   => array( 'rows', 'Cards', array( 'icon', 'Name', 'Text' ) ),
 		) ),
 		'team'    => array( 'group', 'Meet the team', array(
-			'title'     => array( 'text', 'Heading' ),
+			'title'     => array( 'text', 'Heading', 'The people under it are edited under Team in the admin menu, and appear in their Order.' ),
 			'note'      => array( 'area', 'Note' ),
 			'labels'    => array( 'slots', 'Card labels', array( 'Experience', 'Delivered', 'LinkedIn link text' ) ),
-			'people'    => array( 'rows', 'People', array( 'Name', 'Role', 'image', 'Experience', 'Delivered', 'LinkedIn URL' ) ),
 		) ),
 	),
 	'items'     => array(
@@ -129,12 +125,6 @@ return array(
 					'title'  => 'Put names to the people behind the work.',
 					'note'   => 'A good working relationship starts with knowing who you&rsquo;re speaking to, and what they&rsquo;re responsible for.',
 					'labels' => array( 'Experience', 'Delivered', 'View LinkedIn profile' ),
-					'people' => array(
-						array( 'Kulwant Singh', 'Founder', 'team-kulwant', '16 years', '240+ projects', 'https://www.linkedin.com/in/kulwant-singh-59338717a' ),
-						array( 'Reena Devi', 'Co-founder', 'team-reena', '14 years', '220+ projects', 'https://www.linkedin.com/in/reena-devi-2k10' ),
-						array( 'Abhishek Thakur', 'Senior SEO executive', '', '6 years', '80+ projects', '' ),
-						array( 'Rahul Verma', 'SEO specialist', '', '4 years', '50+ projects', '' ),
-					),
 				),
 			),
 		),

@@ -440,19 +440,19 @@
    ========================================================================== */
 @media (max-width: 1600px) {
   :root {
-    --audit-form-col: 480px; --result-gap: 48px; --legal-toc-col: 255px; --legal-gap: 90px; --clause-gap: 48px; --step4-gap: 24px; --part-pad: 36px; --fit-gap: 60px; --midcta-pad: 78px; --belief-gap: 36px; --vs-key-col: 225px; --people-gap: 24px; --person-photo-h: 240px; --q-head-col2: 345px; --q-body-gap: 72px; --qgroup-gap: 66px; --story-photo-col: 465px; --story-pad: 42px; --story-gap: 30px; --embed-h: 340px; --who-photo-col: 315px; --who-photo-h: 390px; --ta-min: 80px; --audit-lede-gap: 72px; --how-gap: 36px;
+    --audit-form-col: 480px; --result-gap: 48px; --legal-toc-col: 255px; --legal-gap: 90px; --clause-gap: 48px; --step4-gap: 24px; --part-pad: 36px; --fit-gap: 60px; --midcta-pad: 78px; --belief-gap: 36px; --vs-key-col: 225px; --people-gap: 24px; --q-head-col2: 345px; --q-body-gap: 72px; --qgroup-gap: 66px; --story-photo-col: 465px; --story-pad: 42px; --story-gap: 30px; --embed-h: 340px; --who-photo-col: 315px; --who-photo-h: 390px; --ta-min: 80px; --audit-lede-gap: 72px; --how-gap: 36px;
   }
 }
 
 @media (max-width: 1366px) {
   :root {
-    --audit-form-col: 427px; --result-gap: 43px; --legal-toc-col: 227px; --legal-gap: 80px; --clause-gap: 43px; --step4-gap: 21px; --part-pad: 32px; --fit-gap: 53px; --midcta-pad: 69px; --belief-gap: 32px; --vs-key-col: 200px; --people-gap: 21px; --person-photo-h: 214px; --q-head-col2: 307px; --q-body-gap: 64px; --qgroup-gap: 59px; --story-photo-col: 413px; --story-pad: 37px; --story-gap: 27px; --embed-h: 300px; --who-photo-col: 280px; --who-photo-h: 347px; --ta-min: 72px; --audit-lede-gap: 64px; --how-gap: 32px;
+    --audit-form-col: 427px; --result-gap: 43px; --legal-toc-col: 227px; --legal-gap: 80px; --clause-gap: 43px; --step4-gap: 21px; --part-pad: 32px; --fit-gap: 53px; --midcta-pad: 69px; --belief-gap: 32px; --vs-key-col: 200px; --people-gap: 21px; --q-head-col2: 307px; --q-body-gap: 64px; --qgroup-gap: 59px; --story-photo-col: 413px; --story-pad: 37px; --story-gap: 27px; --embed-h: 300px; --who-photo-col: 280px; --who-photo-h: 347px; --ta-min: 72px; --audit-lede-gap: 64px; --how-gap: 32px;
   }
 }
 
 @media (max-width: 1150px) {
   :root {
-    --audit-form-col: 360px; --result-gap: 34px; --legal-toc-col: 181px; --legal-gap: 64px; --clause-gap: 34px; --step4-gap: 17px; --part-pad: 26px; --fit-gap: 42px; --midcta-pad: 55px; --belief-gap: 26px; --vs-key-col: 160px; --people-gap: 17px; --person-photo-h: 170px; --q-head-col2: 245px; --q-body-gap: 51px; --qgroup-gap: 47px; --story-photo-col: 330px; --story-pad: 30px; --story-gap: 22px; --embed-h: 260px; --who-photo-col: 225px; --who-photo-h: 278px; --ta-min: 64px; --audit-lede-gap: 48px; --how-gap: 26px;
+    --audit-form-col: 360px; --result-gap: 34px; --legal-toc-col: 181px; --legal-gap: 64px; --clause-gap: 34px; --step4-gap: 17px; --part-pad: 26px; --fit-gap: 42px; --midcta-pad: 55px; --belief-gap: 26px; --vs-key-col: 160px; --people-gap: 17px; --q-head-col2: 245px; --q-body-gap: 51px; --qgroup-gap: 47px; --story-photo-col: 330px; --story-pad: 30px; --story-gap: 22px; --embed-h: 260px; --who-photo-col: 225px; --who-photo-h: 278px; --ta-min: 64px; --audit-lede-gap: 48px; --how-gap: 26px;
   }
   /* Three how-steps still fit at 1024 — they are short. The audit contents
      do not, so they take the same two-column collapse as the pricing page. */
@@ -594,8 +594,6 @@
 }
 
 @media (max-width: 900px) {
-  :root { --person-photo-h: 260px; }
-
   .beliefs { grid-template-columns: 1fr; gap: 28px; }
   .beliefs--icons { grid-template-columns: 1fr; }
   .offices { grid-template-columns: 1fr; }
@@ -620,7 +618,6 @@
 }
 
 @media (max-width: 600px) {
-  :root { --person-photo-h: 300px; }
   .people { grid-template-columns: 1fr; }
 }
 

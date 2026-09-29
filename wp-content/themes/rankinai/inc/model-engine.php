@@ -18,6 +18,8 @@
  *               content exists, or the content is orphaned.
  *   'register'  custom types only: labels and args for register_post_type()
  *   'flat'      true: the type's posts live at /{slug}/ (services, industries)
+ *   'sortable'  true: the admin list runs in Order and its rows can be dragged
+ *               to change it, and a new post starts at the end (team)
  *   'schema'    the fields, see FIELD KINDS below
  *   'unpack'    optional callable( $data ): reshape the array for the template,
  *               where one field has to serve two shapes (see story.php)
@@ -225,6 +227,106 @@ add_action( 'template_redirect', function () {
 } );
 
 /* -----------------------------------------------------------------------------
+ * Drag to reorder, for the types that want it (team). The admin list runs in
+ * Order, each row gets a handle, and a drop sends the rows' new order to
+ * rankinai_order, which renumbers the whole type 1, 2, 3... in one go, so
+ * posts on another page of the list, or left at 0, keep a place. Without
+ * JavaScript the Order box (edit screen and Quick Edit) does the same job.
+ * -------------------------------------------------------------------------- */
+function rankinai_sortable_types() {
+	$t = array();
+	foreach ( rankinai_models() as $m ) { if ( ! empty( $m['sortable'] ) ) { $t[] = $m['post_type']; } }
+	return $t;
+}
+
+/** True on a sortable type's admin list when it is showing the site's order. */
+function rankinai_sorting_here() {
+	global $pagenow, $typenow;
+	if ( 'edit.php' !== $pagenow || ! in_array( $typenow, rankinai_sortable_types(), true ) ) { return false; }
+	$by = $_GET['orderby'] ?? ''; // phpcs:ignore -- read only
+	return ( '' === $by || 'menu_order' === $by ) && 'trash' !== ( $_GET['post_status'] ?? '' ); // phpcs:ignore
+}
+
+add_action( 'pre_get_posts', function ( $q ) {
+	if ( is_admin() && $q->is_main_query() && in_array( $q->get( 'post_type' ), rankinai_sortable_types(), true ) && ! $q->get( 'orderby' ) ) {
+		$q->set( 'orderby', array( 'menu_order' => 'ASC', 'ID' => 'ASC' ) );
+	}
+} );
+
+/* A new post starts at the end, not at 0 above everyone. */
+add_filter( 'wp_insert_post_data', function ( $data, $postarr ) {
+	if ( empty( $postarr['ID'] ) && 0 === (int) $data['menu_order'] && in_array( $data['post_type'], rankinai_sortable_types(), true ) ) {
+		global $wpdb;
+		$max = $wpdb->get_var( $wpdb->prepare( "SELECT MAX(menu_order) FROM $wpdb->posts WHERE post_type = %s AND post_status NOT IN ('trash', 'auto-draft')", $data['post_type'] ) );
+		$data['menu_order'] = 1 + (int) $max;
+	}
+	return $data;
+}, 10, 2 );
+
+add_action( 'admin_init', function () {
+	foreach ( rankinai_sortable_types() as $type ) {
+		add_filter( "manage_{$type}_posts_columns", function ( $cols ) {
+			if ( ! rankinai_sorting_here() ) { return $cols; }
+			$out = array();
+			foreach ( $cols as $k => $v ) {
+				$out[ $k ] = $v;
+				if ( 'cb' === $k ) { $out['ri_drag'] = '<span class="screen-reader-text">Order</span>'; }
+			}
+			return $out;
+		} );
+		add_action( "manage_{$type}_posts_custom_column", function ( $col ) {
+			if ( 'ri_drag' === $col ) {
+				echo '<span class="ri-drag dashicons dashicons-menu" title="Drag to change the order" aria-hidden="true"></span>';
+			}
+		} );
+	}
+} );
+
+add_action( 'admin_enqueue_scripts', function () {
+	if ( ! rankinai_sorting_here() ) { return; }
+	global $typenow;
+	wp_enqueue_script( 'rankinai-admin-order', get_template_directory_uri() . '/assets/js/admin-order.js', array( 'jquery-ui-sortable' ), rankinai_asset_version( '/assets/js/admin-order.js' ), true );
+	wp_localize_script( 'rankinai-admin-order', 'rankinaiOrder', array(
+		'ajax'   => admin_url( 'admin-ajax.php' ),
+		'nonce'  => wp_create_nonce( 'rankinai_order' ),
+		'type'   => $typenow,
+		'failed' => 'The new order could not be saved. The page will reload with the order as it was.',
+	) );
+	wp_register_style( 'rankinai-admin-order', false, array(), '1' );
+	wp_enqueue_style( 'rankinai-admin-order' );
+	wp_add_inline_style( 'rankinai-admin-order', '
+		.column-ri_drag { width: 28px; }
+		.ri-drag { cursor: move; color: #8c8f94; }
+		tr:hover .ri-drag { color: #1d2327; }
+		.ri-drag-placeholder td { background: #f0f6fc; border: 1px dashed #72aee6; }
+		#the-list.ri-saving { opacity: .6; }
+	' );
+} );
+
+add_action( 'wp_ajax_rankinai_order', function () {
+	check_ajax_referer( 'rankinai_order', 'nonce' );
+	$type = sanitize_key( $_POST['type'] ?? '' );
+	$obj  = get_post_type_object( $type );
+	if ( ! $obj || ! in_array( $type, rankinai_sortable_types(), true ) || ! current_user_can( $obj->cap->edit_others_posts ) ) {
+		wp_send_json_error( 'not allowed', 403 );
+	}
+	$moved = array_map( 'intval', (array) ( $_POST['ids'] ?? array() ) );
+	$all   = get_posts( array( 'post_type' => $type, 'post_status' => 'any', 'numberposts' => -1, 'fields' => 'ids', 'orderby' => array( 'menu_order' => 'ASC', 'ID' => 'ASC' ) ) );
+	if ( ! $moved || array_diff( $moved, $all ) ) { wp_send_json_error( 'unknown post', 400 ); }
+	// The dragged rows keep the places they held among everyone, in their new order.
+	$queue = $moved;
+	foreach ( $all as $i => $id ) {
+		if ( in_array( $id, $moved, true ) ) { $all[ $i ] = array_shift( $queue ); }
+	}
+	global $wpdb;
+	foreach ( array_values( $all ) as $i => $id ) {
+		$wpdb->update( $wpdb->posts, array( 'menu_order' => $i + 1 ), array( 'ID' => $id ) );
+		clean_post_cache( $id );
+	}
+	wp_send_json_success();
+} );
+
+/* -----------------------------------------------------------------------------
  * Images: import one of the site's own images into the Media Library, once.
  * Returns the attachment ID, or '' when there is nothing to import. A second
  * call for the same file returns the same attachment.
@@ -269,9 +371,18 @@ function rankinai_import_image( $ref ) {
  * Reading the flat build's data files. They are plain arrays; their requires
  * (the config and the template) are removed before they are evaluated. Used
  * by the models whose content already lives in a flat data file.
+ *
+ * The flat build is found at RANKINAI_FLAT_DIR, set in wp-config.php. It is
+ * only read by the seed, so a server without the flat build (the live site)
+ * leaves it undefined. The fallback is the folder above WordPress, where the
+ * flat build was while WordPress lived inside it as rankinai-local/.
  * -------------------------------------------------------------------------- */
+function rankinai_flat_dir() {
+	return untrailingslashit( defined( 'RANKINAI_FLAT_DIR' ) ? RANKINAI_FLAT_DIR : dirname( ABSPATH ) );
+}
+
 function rankinai_read_flat_data( $slug, $var ) {
-	$file = dirname( ABSPATH ) . '/' . $slug . '.php';
+	$file = rankinai_flat_dir() . '/' . $slug . '.php';
 	if ( ! is_readable( $file ) ) { return null; }
 	$code = file_get_contents( $file );
 	$code = preg_replace( "#require(_once)? __DIR__ \\. '/includes/[a-z-]+\\.php';#", '', $code );

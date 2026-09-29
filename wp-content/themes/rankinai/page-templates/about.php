@@ -19,6 +19,15 @@ $think   = $D['think'] ?? array();
 $working = $D['working'] ?? array();
 $team    = $D['team'] ?? array();
 
+/* The people are team members (inc/models/team.php), in their Order, each
+   as the row the flat build's card reads: name, role, photo, years, work,
+   LinkedIn. */
+$people = array();
+foreach ( get_posts( array( 'post_type' => 'rankinai_team', 'numberposts' => -1, 'orderby' => array( 'menu_order' => 'ASC', 'ID' => 'ASC' ) ) ) as $p ) {
+	$m        = rankinai_model_data( $p->ID );
+	$people[] = array( $p->post_title, $m['role'] ?? '', $m['photo'] ?? '', $m['years'] ?? '', $m['work'] ?? '', $m['li'] ?? '' );
+}
+
 /* A link field holds a site path (/call/), an anchor (#team) or a full URL. */
 $ri_href = function ( $h ) {
 	$h = (string) $h;
@@ -210,7 +219,7 @@ foreach ( $hero['shots'] ?? array() as $i => $shot ) :
 <?php endif; ?>
 
 
-<?php if ( $team ) :
+<?php if ( $team || $people ) :
 	$labels = $team['labels'] ?? array( '', '', '' );
 ?>
 <section class="band band--light" id="team">
@@ -227,11 +236,11 @@ foreach ( $hero['shots'] ?? array() as $i => $shot ) :
       </div>
     </div>
 
-<?php if ( ! empty( $team['people'] ) ) : ?>
+<?php if ( $people ) : ?>
     <div class="teamslider" data-teamslider>
 
       <ul class="people" role="list" data-team-track>
-<?php foreach ( $team['people'] as $m ) :
+<?php foreach ( $people as $m ) :
 		list( $name, $role, $photo, $years, $work, $li ) = $m;
 ?>
         <li class="person">
