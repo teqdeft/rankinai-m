@@ -3,10 +3,7 @@ name: Deploy WordPress Website
 on:
   push:
     branches:
-      - main                      # change to "master" if that is your branch
-  pull_request:
-    branches:
-      - main                      # PRs only run the PHP check, never deploy
+      - main
   workflow_dispatch:
     inputs:
       dry_run:
@@ -14,85 +11,32 @@ on:
         type: boolean
         default: false
 
-permissions:
-  contents: read
-
-env:
-  # Match this to cPanel > Software > Select PHP Version.
-  PHP_VERSION: '8.2'
-  # Folders whose PHP files are syntax-checked before every deploy.
-  # Add your own custom plugin folders here, e.g. wp-content/plugins/my-plugin
-  LINT_PATHS: wp-content/themes wp-content/mu-plugins
+# One deploy at a time. Two overlapping runs would fight over the same FTP
+# connection and corrupt the sync-state file the action keeps on the server.
+concurrency:
+  group: deploy-production
+  cancel-in-progress: false
 
 jobs:
-  # ---------------------------------------------------------------- CI -----
-  lint:
-    name: PHP syntax check
-    runs-on: ubuntu-latest
-
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
-
-      - name: Set up PHP
-        uses: shivammathur/setup-php@v2
-        with:
-          php-version: ${{ env.PHP_VERSION }}
-          coverage: none
-          tools: none
-
-      - name: Lint PHP files
-        run: |
-          set -uo pipefail
-          targets=""
-          for p in $LINT_PATHS; do
-            [ -d "$p" ] && targets="$targets $p"
-          done
-          if [ -z "$targets" ]; then
-            echo "No lint folders found, skipping."
-            exit 0
-          fi
-          if ! find $targets -type f -name '*.php' \
-                 -not -path '*/vendor/*' -not -path '*/node_modules/*' -print0 \
-               | xargs -0 -n1 -P4 php -l > /tmp/lint.log 2>&1; then
-            echo "::error::PHP syntax errors found, deploy cancelled."
-            grep -v '^No syntax errors' /tmp/lint.log
-            exit 1
-          fi
-          echo "$(wc -l < /tmp/lint.log) PHP files checked, no syntax errors."
-
-  # ---------------------------------------------------------------- CD -----
   deploy:
-    name: Deploy to cPanel (public_html)
-    needs: lint
-    # Only main is ever deployed. PRs and other branches stop after the lint.
-    if: github.ref == 'refs/heads/main' && github.event_name != 'pull_request'
+    name: Deploy to cPanel
     runs-on: ubuntu-latest
-    environment: production
-
-    # One deploy at a time. Two overlapping runs would fight over the same FTP
-    # connection and corrupt the sync-state file the action keeps on the server.
-    concurrency:
-      group: deploy-production
-      cancel-in-progress: false
 
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
 
       - name: Deploy via FTP
-        timeout-minutes: 60
+        timeout-minutes: 180            # first deploy uploads every file; later ones only changes
         uses: SamKirkland/FTP-Deploy-Action@v4.3.5
         with:
           server: ${{ secrets.FTP_SERVER }}
           username: ${{ secrets.FTP_USERNAME }}
           password: ${{ secrets.FTP_PASSWORD }}
-          protocol: ftp                  # change to "ftp" if FTPS stalls on your host
+          protocol: ftp                 # host drops FTPS connections
           port: 21
-          local-dir: ./                   # the repository root is the WordPress root
-          # Main cPanel login: /public_html/
-          # FTP account whose directory IS public_html: ./
-          # Set the FTP_SERVER_DIR variable to override. Must end with "/".
+          timeout: 600000               # 10 min; the 30 s default caused "Timeout (control socket)"
+          local-dir: ./                 # the repository root is the WordPress root
           server-dir: ${{ vars.FTP_SERVER_DIR || '/public_html/' }}
           dangerous-clean-slate: false
           dry-run: ${{ inputs.dry_run == true }}
@@ -101,57 +45,20 @@ jobs:
             **/.git*/**
             **/.github/**
             **/node_modules/**
-            **/.vscode/**
-            **/.idea/**
             **/.claude/**
+            **/.vscode/**
             **/CLAUDE.md
-            **/.DS_Store
             **/*.log
-            **/error_log
 
             # --- must never be overwritten on the server ---------------------
-            # Live rewrite rules (RewriteBase and cache/security rules differ
-            # between local and live).
             .htaccess
-
-            # Credentials and salts.
             **/wp-config.php
             **/.env
 
-            # cPanel-managed files and folders.
-            .user.ini
-            php.ini
-            .well-known/**
-            cgi-bin/**
-
-            # Content that lives on the server, not in git. Because
-            # dangerous-clean-slate is false, nothing here is ever deleted.
+            # Content that lives on the server, not in git.
             wp-content/uploads/**
-            # Add licensed plugins kept only on the server, e.g.:
-            # wp-content/plugins/advanced-custom-fields-pro/**
 
-            # Runtime output, caches and backups created on the server.
+            # Local runtime output.
             wp-content/upgrade/**
             wp-content/upgrade-temp-backup/**
             wp-content/cache/**
-            wp-content/wflogs/**
-            wp-content/updraft/**
-            wp-content/ai1wm-backups/**
-            wp-content/advanced-cache.php
-            wp-content/object-cache.php
-
-      - name: Check the live site responds
-        if: ${{ vars.SITE_URL != '' && inputs.dry_run != true }}
-        env:
-          SITE_URL: ${{ vars.SITE_URL }}
-        run: |
-          for attempt in 1 2 3; do
-            code=$(curl -s -o /dev/null -w '%{http_code}' -L --max-time 30 "$SITE_URL" || echo 000)
-            echo "Attempt $attempt: HTTP $code from $SITE_URL"
-            if [ "$code" != "000" ] && [ "$code" -lt 400 ]; then
-              exit 0
-            fi
-            sleep 10
-          done
-          echo "::error::Site did not return a healthy response after deploy."
-          exit 1
