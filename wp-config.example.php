@@ -37,6 +37,12 @@ define( 'RANKINAI_NOINDEX', true );
    inc/forms.php. */
 define( 'RANKINAI_FORMS_SKIP_MAIL', true );
 
+/* Local only: the flat build, which the seed reads its content from (see the
+   theme's inc/model-engine.php). This folder is rankinai-wp/rankinai-m, and
+   the flat build is rankinAI, beside rankinai-wp. Leave it out on the live
+   site, which has no flat build and never runs the seed. */
+define( 'RANKINAI_FLAT_DIR', dirname( __DIR__, 2 ) . '/rankinAI' );
+
 if ( ! defined( 'ABSPATH' ) ) {
 	define( 'ABSPATH', __DIR__ . '/' );
 }

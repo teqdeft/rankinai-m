@@ -1,14 +1,21 @@
+# The local admin login and the debug log (which holds form submissions while
+# RANKINAI_FORMS_SKIP_MAIL is on) are never served. Outside the WordPress
+# block, so saving permalinks leaves it alone.
+<FilesMatch "^(LOCAL-LOGIN\.txt|debug\.log)$">
+Require all denied
+</FilesMatch>
+
 # BEGIN WordPress
-# Written for Apache (MAMP) with the repo root as document root, so the site
-# runs at /rankinai-local/. WordPress rewrites this block when permalinks are
-# saved; if the site lives at a different path, save permalinks once.
+# Written for Apache with this folder as the document root, so the site runs
+# at /. WordPress rewrites this block when permalinks are saved. If the site
+# lives at a different path, save permalinks once.
 <IfModule mod_rewrite.c>
 RewriteEngine On
 RewriteRule .* - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization}]
-RewriteBase /rankinai-local/
+RewriteBase /
 RewriteRule ^index\.php$ - [L]
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
-RewriteRule . /rankinai-local/index.php [L]
+RewriteRule . /index.php [L]
 </IfModule>
 # END WordPress

@@ -212,7 +212,7 @@ function rankinai_body_unpack( array $blocks ) {
 /** The flat build's $POSTS rows, read from includes/posts.php for the seed.
  *  Only the array is evaluated: the file also defines the helpers above. */
 function rankinai_flat_posts() {
-	$code = (string) file_get_contents( dirname( ABSPATH ) . '/includes/posts.php' );
+	$code = (string) @file_get_contents( rankinai_flat_dir() . '/includes/posts.php' );
 	$a    = strpos( $code, '$POSTS = [' );
 	$b    = strpos( $code, "\n];", $a );
 	if ( false === $a || false === $b ) { return array(); }
