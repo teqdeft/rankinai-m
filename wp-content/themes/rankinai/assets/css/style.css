@@ -1224,8 +1224,18 @@ main > .band--forest + .band--forest {
   height: var(--case-photo-h);
   display: grid;
   place-items: center;
+  /* One row the height of the frame, and nothing past its edges. Without
+     the row, height: 100% on the photo resolves against the photo's own
+     height, so a photo taller than its frame ran out over what followed. */
+  grid-template-rows: minmax(0, 1fr);
+  overflow: hidden;
   background: repeating-linear-gradient(135deg, #EFEAE0 0 10px, #E7E1D5 10px 20px);
 }
+/* The home page's story cards: the frame takes the photographs' own shape
+   (all three are cut to 1200 by 580), so each shows whole at every width.
+   The fixed height fitted only at 1024 and 1440. At 414, 768 and 2560 the
+   photo ran 22 to 136px over the client's name. */
+.case > .case__photo { height: auto; aspect-ratio: 1200 / 580; }
 /* A real photo fills the frame; the striped placeholder underneath only
    shows while it loads, or if it is missing. */
 .case__photo img {
@@ -3197,10 +3207,6 @@ html.lenis body { height: auto; }
   border-radius: var(--r-panel);
   overflow: hidden;
   margin-bottom: 8px;
-  /* One row the height of the frame. Without it the grid row sizes to the
-     photo, height: 100% resolves against the photo's own height, and a
-     portrait taller than the frame (600 by 800) lost its lower third. */
-  grid-template-rows: minmax(0, 1fr);
 }
 /* Portraits crop from high up, where the face is, not from the middle. */
 .person__photo img { object-position: 50% 20%; }
