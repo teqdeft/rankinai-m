@@ -15,10 +15,31 @@
 if ( ! defined( 'ABSPATH' ) ) { exit; }
 
 if ( ! function_exists( 'url' ) ) {
-	/** An internal link. Always call this rather than writing a path by hand. */
+	/** An internal link. Always call this rather than writing a path by hand.
+	 *  A full URL comes back as it is, so a link field may hold one.
+	 *
+	 *  /call/ is the one path that can leave the site. Every "Book a 20-minute
+	 *  call" link is written as /call/ (twelve page and header fields, eight
+	 *  templates), and all of them pass through here. While the /call/ page
+	 *  is not published they go to the booking link on Website settings
+	 *  (Calendly since 29 Sep 2026). Publish the page and they go to it again. */
 	function url( string $path = '/' ): string {
+		if ( preg_match( '#^(https?:)?//#', $path ) ) { return $path; }
+		if ( '/call' === untrailingslashit( '/' . ltrim( $path, '/' ) ) && ! rankinai_call_page_live() ) {
+			return rankinai_site( 'call' );
+		}
 		return home_url( '/' . ltrim( $path, '/' ) );
 	}
+}
+
+/** True when the /call/ page is published. */
+function rankinai_call_page_live(): bool {
+	static $live = null;
+	if ( null === $live ) {
+		$page = get_page_by_path( 'call', OBJECT, 'page' );
+		$live = $page && 'publish' === $page->post_status;
+	}
+	return $live;
 }
 
 if ( ! function_exists( 'asset' ) ) {

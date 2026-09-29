@@ -27,6 +27,9 @@ function rankinai_site( string $key ): string {
 		'offices' => 'Zirakpur, Punjab, India',
 		'address' => 'Office No. 303, Tricity Plaza, Zirakpur, Punjab 160104, India',
 		'hours'   => 'Monday to Friday, 9am–6pm IST',
+		// Where the "Book a 20-minute call" links go while /call/ is a draft
+		// (see url() in helpers.php). Given by Kulwant, 29 Sep 2026.
+		'call'    => 'https://calendly.com/kulwant-saini/rankinai?month=2026-09',
 	);
 	if ( 'year' === $key ) { return date( 'Y' ); }
 	$v = function_exists( 'get_field' ) ? get_field( 'site_' . $key, 'option' ) : '';

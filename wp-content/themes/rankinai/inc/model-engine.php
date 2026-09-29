@@ -447,7 +447,10 @@ function rankinai_seed_models( $force = false, $only = null ) {
 				if ( $parent ) { $args['post_parent'] = $parent->ID; }
 			}
 			if ( $existing ) {
+				// A refill is content only: a page set to draft (the /call/ page)
+				// stays a draft.
 				$args['ID'] = $existing->ID;
+				unset( $args['post_status'] );
 				$id = wp_update_post( $args );
 			} else {
 				$id = wp_insert_post( $args );

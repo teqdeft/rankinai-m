@@ -200,6 +200,7 @@ add_action( 'acf/init', function () {
 			ri_text( 'site', 'site_offices', 'Offices (short line)', 'Empty = Zirakpur, Punjab, India. Shown in the footer.' ),
 			ri_text( 'site', 'site_address', 'Full address', 'Empty = the Tricity Plaza address. Shown on the contact page.' ),
 			ri_text( 'site', 'site_hours', 'Office hours', 'Empty = Monday to Friday, 9am–6pm IST.' ),
+			ri_text( 'site', 'site_call', 'Call booking link', 'While the /call/ page is not published, every link to /call/ goes here instead: each "Book a 20-minute call", the header, the closing section, the two pricing buttons. Empty = https://calendly.com/kulwant-saini/rankinai?month=2026-09. Publish the /call/ page again and the links go back to it.' ),
 			ri_f( 'site', 'post_object', 'site_form_audit', 'Growth audit form', array( 'post_type' => array( 'wpcf7_contact_form' ), 'return_format' => 'id', 'allow_null' => 1, 'instructions' => 'The Contact Form 7 form behind every "Get your growth audit" (the modal and /growth-audit/). Edit its fields and email under Contact.' ) ),
 			ri_f( 'site', 'post_object', 'site_form_contact', 'Contact form', array( 'post_type' => array( 'wpcf7_contact_form' ), 'return_format' => 'id', 'allow_null' => 1, 'instructions' => 'The Contact Form 7 form on /contact/.' ) ),
 		),
