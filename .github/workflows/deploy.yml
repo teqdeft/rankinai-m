@@ -10,10 +10,6 @@ on:
         description: 'List what would change without uploading anything'
         type: boolean
         default: false
-      seed_state:
-        description: 'Run ONCE: mark the live site as already in sync (uploads nothing)'
-        type: boolean
-        default: false
 
 # One deploy at a time. Two overlapping runs would fight over the same FTP
 # connection and corrupt the sync-state file the action keeps on the server.
@@ -26,9 +22,38 @@ jobs:
     name: Deploy to cPanel
     runs-on: ubuntu-latest
 
+    env:
+      FTP_SERVER: ${{ secrets.FTP_SERVER }}
+      FTP_USERNAME: ${{ secrets.FTP_USERNAME }}
+      FTP_PASSWORD: ${{ secrets.FTP_PASSWORD }}
+      SERVER_DIR: ${{ vars.FTP_SERVER_DIR || '/public_html/' }}
+
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
+
+      # The site is already live, so it is never re-uploaded in full (the host
+      # drops the connection after a few thousand files). If the server has no
+      # sync-state file yet, this run only records the live site as in sync.
+      - name: Check server sync state
+        id: state
+        run: |
+          dir="${SERVER_DIR#./}"; dir="${dir#/}"
+          echo "url=ftp://$FTP_SERVER/${dir}.ftp-deploy-sync-state.json" >> "$GITHUB_OUTPUT"
+          set +e
+          curl -sS --fail --user "$FTP_USERNAME:$FTP_PASSWORD" \
+            "ftp://$FTP_SERVER/${dir}.ftp-deploy-sync-state.json" -o /dev/null
+          code=$?
+          set -e
+          if [ $code -eq 0 ]; then
+            echo "seed=false" >> "$GITHUB_OUTPUT"
+          elif [ $code -eq 78 ]; then
+            echo "No sync state on server yet: recording the live site as in sync (no files uploaded)."
+            echo "seed=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "::error::Could not reach the FTP server (curl exit $code). Check the FTP secrets."
+            exit 1
+          fi
 
       - name: Deploy via FTP
         timeout-minutes: 60
@@ -43,7 +68,7 @@ jobs:
           local-dir: ./                 # the repository root is the WordPress root
           server-dir: ${{ vars.FTP_SERVER_DIR || '/public_html/' }}
           dangerous-clean-slate: false
-          dry-run: ${{ inputs.dry_run == true || inputs.seed_state == true }}
+          dry-run: ${{ inputs.dry_run == true || steps.state.outputs.seed == 'true' }}
           exclude: |
             **/.git*
             **/.git*/**
@@ -67,18 +92,9 @@ jobs:
             wp-content/upgrade-temp-backup/**
             wp-content/cache/**
 
-      # Seed run only: upload the state file the dry run just built, so the
-      # server is treated as already in sync and later deploys send only changes.
-      - name: Save sync state to server
-        if: ${{ inputs.seed_state == true }}
-        env:
-          FTP_SERVER: ${{ secrets.FTP_SERVER }}
-          FTP_USERNAME: ${{ secrets.FTP_USERNAME }}
-          FTP_PASSWORD: ${{ secrets.FTP_PASSWORD }}
-          SERVER_DIR: ${{ vars.FTP_SERVER_DIR || '/public_html/' }}
+      - name: Save sync state to server (first run only)
+        if: ${{ steps.state.outputs.seed == 'true' && inputs.dry_run != true }}
         run: |
-          dir="${SERVER_DIR#./}"; dir="${dir#/}"
-          curl --fail -sS --user "$FTP_USERNAME:$FTP_PASSWORD" \
-            -T .ftp-deploy-sync-state.json \
-            "ftp://$FTP_SERVER/${dir}.ftp-deploy-sync-state.json"
-          echo "Sync state saved. Future deploys upload only changed files."
+          curl -sS --fail --user "$FTP_USERNAME:$FTP_PASSWORD" \
+            -T .ftp-deploy-sync-state.json "${{ steps.state.outputs.url }}"
+          echo "Sync state saved. From now on only changed files are uploaded."
