@@ -1230,3 +1230,19 @@ main > section.band--topics + section.band:not(:first-of-type) { margin-top: 0; 
 @media (max-width: 900px) {
   .brief { grid-template-columns: minmax(0, 1fr); row-gap: var(--sec-gap); }
 }
+
+/* Step 01 of the method card, 1 Oct 2026. Below 1600px the card is set
+   by its four questions (style.css), so a little less padding keeps it
+   close to the old height. On phones the questions wrap instead of being
+   cut at the card's edge, and each keeps two lines from the start, so the
+   card does not grow while the script types them. */
+@media (max-width: 1600px) {
+  .sch--ask { padding: 28px; gap: 16px; }
+}
+@media (max-width: 600px) {
+  .sch--ask { padding: 24px; gap: 14px; }
+  .sch--ask .ask__q { white-space: normal; min-height: 2.8em; min-height: 2lh; }
+}
+@media (max-width: 360px) {
+  .sch--ask .ask__q { min-height: 4.2em; min-height: 3lh; }
+}
