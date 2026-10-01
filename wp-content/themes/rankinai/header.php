@@ -29,7 +29,7 @@ $HEADER = rankinai_chrome( 'header' );
      Six nav items, one green button. No phone number, no login, no search.
      Three of the six open panels; the rest link straight through.
      ============================================================================= -->
-<header class="site-header 1" data-header>
+<header class="site-header" data-header>
   <div class="site-header__panel">
 
     <a class="wordmark" href="<?= url('/') ?>" aria-label="<?= e($SITE['name']) ?> home">Rankin<em>AI</em><i>.</i></a>
