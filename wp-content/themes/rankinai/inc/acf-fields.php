@@ -189,20 +189,36 @@ add_action( 'acf/init', function () {
 			'redirect'   => false,
 		) );
 	}
+	/* One group in three tabs: the header, the site details, the footer. The
+	   header and footer fields come from inc/chrome.php, and were groups of
+	   their own until 7 Oct 2026. Tabs only change the layout: every field
+	   keeps its key and name, so saved values are unchanged. */
+	$tab = function ( $name, $label ) {
+		return ri_f( 'site', 'tab', 'tab_' . $name, $label, array( 'name' => '', 'placement' => 'top', 'endpoint' => 0 ) );
+	};
 	acf_add_local_field_group( array(
 		'key'      => 'group_ri_settings',
 		'title'    => 'Website settings',
-		'fields'   => array(
-			ri_text( 'site', 'site_name', 'Business name', 'Empty = RankinAI.' ),
-			ri_text( 'site', 'site_tagline', 'Tagline', 'Empty = Digital marketing for firms that sell expertise. Also the fallback meta description.' ),
-			ri_text( 'site', 'site_email', 'Email', 'Empty = hello@rankinai.com.' ),
-			ri_text( 'site', 'site_phone', 'Phone', 'Empty = +91 906 9710 000.' ),
-			ri_text( 'site', 'site_offices', 'Offices (short line)', 'Empty = Zirakpur, Punjab, India. Shown in the footer.' ),
-			ri_text( 'site', 'site_address', 'Full address', 'Empty = the Tricity Plaza address. Shown on the contact page.' ),
-			ri_text( 'site', 'site_hours', 'Office hours', 'Empty = Monday to Friday, 9am–6pm IST.' ),
-			ri_text( 'site', 'site_call', 'Call booking link', 'While the /call/ page is not published, every link to /call/ goes here instead: each "Book a 20-minute call", the header, the closing section, the two pricing buttons. Empty = https://calendly.com/kulwant-saini/rankinai?month=2026-09. Publish the /call/ page again and the links go back to it.' ),
-			ri_f( 'site', 'post_object', 'site_form_audit', 'Growth audit form', array( 'post_type' => array( 'wpcf7_contact_form' ), 'return_format' => 'id', 'allow_null' => 1, 'instructions' => 'The Contact Form 7 form behind every "Get your growth audit" (the modal and /growth-audit/). Edit its fields and email under Contact.' ) ),
-			ri_f( 'site', 'post_object', 'site_form_contact', 'Contact form', array( 'post_type' => array( 'wpcf7_contact_form' ), 'return_format' => 'id', 'allow_null' => 1, 'instructions' => 'The Contact Form 7 form on /contact/.' ) ),
+		'style'    => 'seamless',
+		'fields'   => array_merge(
+			array( $tab( 'header', 'Header' ) ),
+			function_exists( 'rankinai_chrome_fields' ) ? rankinai_chrome_fields( 'header' ) : array(),
+			array( $tab( 'details', 'Site details' ) ),
+			array(
+				ri_text( 'site', 'site_name', 'Business name', 'Empty = RankinAI.' ),
+				ri_text( 'site', 'site_tagline', 'Tagline', 'Empty = Digital marketing for firms that sell expertise. Also the fallback meta description.' ),
+				ri_text( 'site', 'site_email', 'Email', 'Empty = hello@rankinai.com.' ),
+				ri_text( 'site', 'site_phone', 'Phone', 'Empty = +91 906 9710 000.' ),
+				ri_text( 'site', 'site_offices', 'Offices (short line)', 'Empty = Zirakpur, Punjab, India. Shown in the footer.' ),
+				ri_text( 'site', 'site_address', 'Full address', 'Empty = the Tricity Plaza address. Shown on the contact page.' ),
+				ri_text( 'site', 'site_hours', 'Office hours', 'Empty = Monday to Friday, 9am–6pm IST.' ),
+				ri_f( 'site', 'text', 'site_whatsapp', 'WhatsApp number', array( 'default_value' => '+91 90697 10000', 'instructions' => 'The green button at the bottom right of every page opens a WhatsApp chat with this number. With the country code. Empty = +91 90697 10000.' ) ),
+				ri_text( 'site', 'site_call', 'Call booking link', 'While the /call/ page is not published, every link to /call/ goes here instead: each "Book a 20-minute call", the header, the closing section, the two pricing buttons. Empty = https://calendly.com/kulwant-saini/rankinai?month=2026-09. Publish the /call/ page again and the links go back to it.' ),
+				ri_f( 'site', 'post_object', 'site_form_audit', 'Growth audit form', array( 'post_type' => array( 'wpcf7_contact_form' ), 'return_format' => 'id', 'allow_null' => 1, 'instructions' => 'The Contact Form 7 form behind every "Get your growth audit" (the modal and /growth-audit/). Edit its fields and email under Contact.' ) ),
+				ri_f( 'site', 'post_object', 'site_form_contact', 'Contact form', array( 'post_type' => array( 'wpcf7_contact_form' ), 'return_format' => 'id', 'allow_null' => 1, 'instructions' => 'The Contact Form 7 form on /contact/.' ) ),
+			),
+			array( $tab( 'footer', 'Footer' ) ),
+			function_exists( 'rankinai_chrome_fields' ) ? rankinai_chrome_fields( 'footer' ) : array()
 		),
 		'location' => array( array( array( 'param' => 'options_page', 'operator' => '==', 'value' => 'rankinai-settings' ) ) ),
 	) );

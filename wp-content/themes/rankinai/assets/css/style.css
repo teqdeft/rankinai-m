@@ -8376,3 +8376,32 @@ code {
   border-left-color: var(--clay-light);
   color: var(--on-forest-body);
 }
+
+/* --------------------------------------------------------------------------
+   The WhatsApp button, 7 Oct 2026
+
+   Fixed at the bottom right of every page (the WordPress footer.php, the
+   number on Website settings). WhatsApp's own green, the only colour its
+   mark is recognised in. Above the page and the sticky header (50), below
+   the open mobile menu (60), which should cover it.
+   -------------------------------------------------------------------------- */
+.wafloat {
+  position: fixed;
+  right: 24px;
+  bottom: calc(24px + env(safe-area-inset-bottom, 0px));
+  z-index: 45;
+  display: grid;
+  place-items: center;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background: #25D366;
+  color: #fff;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.18);
+  transition: transform var(--dur) var(--ease), box-shadow var(--dur) var(--ease);
+}
+.wafloat svg { width: 32px; height: 32px; }
+.wafloat:hover { transform: translateY(-2px); box-shadow: 0 10px 24px rgba(0, 0, 0, 0.22); }
+.wafloat:focus-visible { outline: 2px solid var(--forest); outline-offset: 3px; }
+@media (prefers-reduced-motion: reduce) { .wafloat { transition: none; } .wafloat:hover { transform: none; } }
+@media print { .wafloat { display: none; } }

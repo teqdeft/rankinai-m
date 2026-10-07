@@ -30,6 +30,8 @@ function rankinai_site( string $key ): string {
 		// Where the "Book a 20-minute call" links go while /call/ is a draft
 		// (see url() in helpers.php). Given by Kulwant, 29 Sep 2026.
 		'call'    => 'https://calendly.com/kulwant-saini/rankinai?month=2026-09',
+		// The floating WhatsApp button on every page (footer.php), 7 Oct 2026.
+		'whatsapp' => '+91 90697 10000',
 	);
 	if ( 'year' === $key ) { return date( 'Y' ); }
 	$v = function_exists( 'get_field' ) ? get_field( 'site_' . $key, 'option' ) : '';

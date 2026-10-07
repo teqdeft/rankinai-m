@@ -2,18 +2,19 @@
 /**
  * The header and footer, edited on Website settings
  * =============================================================================
- * Added 29 Sep 2026. Two field groups on the Website settings page, "Header"
- * and "Footer", described by a schema in the model engine's field kinds (see
- * inc/model-engine.php), so the fields, the seed and the array header.php and
- * footer.php read come from one definition.
+ * Added 29 Sep 2026. The "Header" and "Footer" tabs of the Website settings
+ * page (two field groups of their own until 7 Oct 2026), described by a
+ * schema in the model engine's field kinds (see inc/model-engine.php), so the
+ * fields, the seed and the array header.php and footer.php read come from one
+ * definition.
  *
  *   Header  the menu (plain links, and drop-down panels with columns of links
  *           and an offer), the text link and the button on the right.
  *   Footer  the about text and strapline, the link columns, the contact
  *           column's labels, and the links after the copyright.
  *
- * The email, phone and office line in the footer are the site details above
- * them on the same page, as before.
+ * The email, phone and office line in the footer are the site details, on
+ * the Site details tab of the same page, as before.
  *
  * EMPTY FALLS BACK. A field left empty (or a list with no rows) shows the
  * original, as the site details do, so the header and footer never go blank.
@@ -59,7 +60,7 @@ function rankinai_chrome_schema() {
 				'quiet' => array( 'bool', 'Plain heading', 'On: the heading is grey, not clay, and the column is quieter (as Company is).' ),
 				'links' => array( 'rows', 'Links', $two ),
 			) ),
-			'contactLabel' => array( 'text', 'Contact column heading', 'The email, phone and office line are the site details above.' ),
+			'contactLabel' => array( 'text', 'Contact column heading', 'The email, phone and office line are on the Site details tab.' ),
 			'phoneLabel'   => array( 'text', 'Phone label' ),
 			'officesLabel' => array( 'text', 'Offices label' ),
 			'legal'        => array( 'rows', 'Links after the copyright', $two ),
@@ -114,23 +115,15 @@ function rankinai_href( $href ) {
 	return ( '/' === $href[0] && '/' !== ( $href[1] ?? '' ) ) ? url( $href ) : $href;
 }
 
-/* The two field groups, under the site details on Website settings. */
-add_action( 'acf/init', function () {
-	if ( ! function_exists( 'acf_add_local_field_group' ) ) { return; }
-	$labels = array( 'header' => 'Header', 'footer' => 'Footer' );
-	$order  = 1;
-	foreach ( rankinai_chrome_schema() as $part => $schema ) {
-		acf_add_local_field_group( array(
-			'key'        => 'group_ri_' . $part,
-			'title'      => $labels[ $part ],
-			'fields'     => rankinai_schema_fields( array(
-				'site_' . $part => array( 'group', '', $schema ),
-			), 'chrome' ),
-			'location'   => array( array( array( 'param' => 'options_page', 'operator' => '==', 'value' => 'rankinai-settings' ) ) ),
-			'menu_order' => $order++,
-		) );
-	}
-} );
+/** The header's or the footer's fields, for their tabs on Website settings
+ *  (the group is registered in inc/acf-fields.php). Their keys are
+ *  field_ri_chrome_site_header and field_ri_chrome_site_footer, as when each
+ *  was a field group of its own, so saved values carry over. */
+function rankinai_chrome_fields( $part ) {
+	return rankinai_schema_fields( array(
+		'site_' . $part => array( 'group', '', rankinai_chrome_schema()[ $part ] ),
+	), 'chrome' );
+}
 
 /** Fill the header and footer fields with the originals, if never saved (or
  *  always, when $force). */

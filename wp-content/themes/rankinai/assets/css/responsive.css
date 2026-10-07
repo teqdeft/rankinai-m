@@ -1246,3 +1246,9 @@ main > section.band--topics + section.band:not(:first-of-type) { margin-top: 0; 
 @media (max-width: 360px) {
   .sch--ask .ask__q { min-height: 4.2em; min-height: 3lh; }
 }
+
+/* The WhatsApp button (style.css), a little smaller and tighter on phones. */
+@media (max-width: 600px) {
+  .wafloat { right: 16px; bottom: calc(16px + env(safe-area-inset-bottom, 0px)); width: 52px; height: 52px; }
+  .wafloat svg { width: 28px; height: 28px; }
+}
