@@ -13,9 +13,10 @@
  *
  * THE FIRST HOUSE RULE. 'quote' left empty renders the honest empty state.
  * A headline or metric figure left empty renders "pending". The SweetRush and
- * Studio Ubique metrics are the flat build's PLACEHOLDER DATA, carried over
- * as-is so the pages match; they must be replaced with the clients' real,
- * signed-off numbers (or removed) before launch. See CLAUDE.md and CLAIMS.md.
+ * Studio Ubique metrics were the flat build's PLACEHOLDER DATA until 8 Oct
+ * 2026. They are pending now (inc/placeholder-sweep.php cleared them on every
+ * copy of the site), and only the clients' real, signed-off numbers go in.
+ * See CLAIMS.md.
  */
 if ( ! defined( 'ABSPATH' ) ) { exit; }
 

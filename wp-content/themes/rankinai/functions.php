@@ -133,3 +133,4 @@ require_once get_template_directory() . '/inc/seed.php';
 require_once get_template_directory() . '/inc/model-engine.php';
 require_once get_template_directory() . '/inc/forms.php';
 require_once get_template_directory() . '/inc/chrome.php';
+require_once get_template_directory() . '/inc/placeholder-sweep.php'; // one-off, 8 Oct 2026, see its header
