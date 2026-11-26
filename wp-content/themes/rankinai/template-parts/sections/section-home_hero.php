@@ -18,7 +18,7 @@ list( $link, $link_href ) = rf_link( rf( 'link', null ), array( $d['link']['titl
 
     <p class="eyebrow"><span><?= wp_kses_post( $eyebrow ) ?></span></p>
 
-    <h1 class="hero__title"><?= wp_kses_post( $title ) ?></h1>
+    <h1 class="hero__title hero__title--home"><?= wp_kses_post( $title ) ?></h1>
 
     <div class="hero__meta hero__meta--home">
       <p class="hero__sub"><?= wp_kses_post( $sub ) ?><?php if ( $sub2 ) : ?><span class="hero__sub2"><?= wp_kses_post( $sub2 ) ?></span><?php endif; ?></p>
