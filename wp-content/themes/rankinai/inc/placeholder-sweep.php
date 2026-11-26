@@ -15,8 +15,10 @@
  * measured"), and the "Headline result" fact quoting it is removed. Anything
  * edited since, a real figure typed in for instance, is left alone.
  *
- * The option rankinai_sweep_20261008 records what it did. Once it is set
- * everywhere this file can be deleted, with its line in functions.php.
+ * The option rankinai_sweep_20261008 records what it did. A second pass, at the
+ * end of this file, followed on 26 Nov 2026 and records itself in
+ * rankinai_sweep_20261126. Once both are set everywhere this file can be
+ * deleted, with its line in functions.php.
  * =============================================================================
  */
 if ( ! defined( 'ABSPATH' ) ) { exit; }
@@ -52,3 +54,35 @@ add_action( 'init', function () {
 	}
 	update_option( 'rankinai_sweep_20261008', $log, false );
 }, 20 );
+
+/*
+ * Second pass, 26 Nov 2026: the overview sentences
+ * -----------------------------------------------------------------------------
+ * The pass above missed one more place each invented result was printed: the
+ * last sentence of the story's overview, which also feeds the page's
+ * structured data. It was still live on 26 Nov. Same rules as above: it runs
+ * once, removes the sentence only while the overview still holds it word for
+ * word, and leaves an overview edited since alone.
+ */
+add_action( 'init', function () {
+	if ( false !== get_option( 'rankinai_sweep_20261126', false ) || ! function_exists( 'update_field' ) ) { return; }
+
+	$invented = array(
+		'sweetrush'     => 'Inbound enquiries rose 3.2 times over five months.',
+		'studio-ubique' => 'Qualified briefs rose 58% over four months.',
+	);
+	$log = array();
+
+	foreach ( $invented as $slug => $sentence ) {
+		$story = get_page_by_path( $slug, OBJECT, 'rankinai_story' );
+		if ( ! $story ) { $log[] = "$slug: not found"; continue; }
+
+		$overview = (string) get_post_meta( $story->ID, 'overview', true );
+		if ( false === strpos( $overview, $sentence ) ) { $log[] = "$slug: sentence not in the overview, left alone"; continue; }
+
+		$overview = trim( preg_replace( '/ {2,}/', ' ', str_replace( $sentence, '', $overview ) ) );
+		update_field( 'field_ri_sty_overview', $overview, $story->ID );
+		$log[] = "$slug: overview sentence removed";
+	}
+	update_option( 'rankinai_sweep_20261126', $log, false );
+}, 21 );
