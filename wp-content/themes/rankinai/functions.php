@@ -134,4 +134,3 @@ require_once get_template_directory() . '/inc/model-engine.php';
 require_once get_template_directory() . '/inc/forms.php';
 require_once get_template_directory() . '/inc/chrome.php';
 require_once get_template_directory() . '/inc/placeholder-sweep.php'; // one-off, 8 Oct 2026, see its header
-require_once get_template_directory() . '/inc/overview-restore.php'; // one-off, 26 Nov 2026, temporary, see its header
