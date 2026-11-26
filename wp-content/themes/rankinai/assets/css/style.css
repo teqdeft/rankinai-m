@@ -1039,6 +1039,8 @@ main > .band--forest + .band--forest {
      further down this file. This carried 1480px, which nothing ever saw. */
   margin-top: var(--hero-title-mt);
 }
+/* The home page headline only, set red on 26 Nov 2026. */
+.hero__title--home { color: #C62828; }
 
 .hero__meta {
   display: grid;
